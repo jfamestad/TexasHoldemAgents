@@ -38,7 +38,6 @@ class HoldemRound:
         # until is_called:
         #     self.table = self.players[self.table.active_player_index]
 
-
     def showdown(self):
         pass
 

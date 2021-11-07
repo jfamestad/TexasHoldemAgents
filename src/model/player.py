@@ -1,5 +1,5 @@
-from deck import Card
 from table import Table
+from action import Action
 
 class Player:
     def __init__(self, name, bankroll):
@@ -11,5 +11,9 @@ class Player:
         self.hole.append(card)
 
     def play(self, table):
-        # check, bet, raise, call, fold
-        return (table)
+        # return action
+        pass
+
+    def best_hand(self, table):
+        # return Hand()
+        pass
