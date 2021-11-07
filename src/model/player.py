@@ -1,4 +1,5 @@
 from deck import Card
+from table import Table
 
 class Player:
     def __init__(self, name, bankroll):
