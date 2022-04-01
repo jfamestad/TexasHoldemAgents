@@ -1,6 +1,6 @@
 import random
 
-from deck import Deck
+from model.deck import Deck
 
 class Table:
     # Table object will be passed around to player

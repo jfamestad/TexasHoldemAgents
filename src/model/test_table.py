@@ -1,4 +1,4 @@
-from table import Table
+from model.table import Table
 
 num_players = 8
 

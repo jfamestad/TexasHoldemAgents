@@ -1,5 +1,5 @@
-from hand import Hand
-from deck import Card
+from model.hand import Hand
+from model.deck import Card
 
 card_1 = Card("A", "Diamonds")
 card_2 = Card("K", "Diamonds")

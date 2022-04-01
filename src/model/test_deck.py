@@ -1,4 +1,4 @@
-from deck import Deck, Card, suits, ranks
+from model.deck import Deck, Card, suits, ranks
 
 def test_draw_1():
     deck = Deck()

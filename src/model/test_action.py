@@ -1,4 +1,4 @@
-from action import Action
+from model.action import Action
 
 def test_init_error():
     did_error = False
@@ -21,7 +21,7 @@ def test_init_check():
 def test_init_raise():
     did_error = False
     try:
-        action = Action("RAISE")
+        action = Action("RAISE", 10)
     except:
         did_error = True
     finally:
@@ -30,7 +30,7 @@ def test_init_raise():
 def test_init_call():
     did_error = False
     try:
-        action = Action("CALL")
+        action = Action("CALL", 10)
     except:
         did_error = True
     finally:

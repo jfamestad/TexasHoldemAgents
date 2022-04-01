@@ -1,14 +1,15 @@
-from holdem_round import HoldemRound
-from table import Table
-from player import Player
+from model.holdem_round import HoldemRound
+# from model.table import Table
+# from model.player import Player
+from players.floyd_folds import Floyd
 
 players = [
-    Player("Josh", 100),
-    Player("Madi", 100),
-    Player("Codi", 100),
-    Player("Michelle", 100),
-    Player("Sophia", 100),
-    Player("Beezie", 100)
+    Floyd("Josh", 100),
+    Floyd("Madi", 100),
+    Floyd("Cody", 100),
+    Floyd("Michelle", 100),
+    Floyd("Sophia", 100),
+    Floyd("Beezie", 100)
 ]
 
 round = HoldemRound(

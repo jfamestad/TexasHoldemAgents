@@ -1,4 +1,4 @@
-from deck import Deck, Card, ranks, suits
+from model.deck import Deck, Card, ranks, suits
 
 hand_rankings = {
     "ROYAL_FLUSH": 1,
