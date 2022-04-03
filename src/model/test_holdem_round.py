@@ -9,7 +9,7 @@ players = [
     Callie("Madi", 100),
     Floyd("Cody", 100),
     Floyd("Michelle", 100),
-    Floyd("Sophia", 100),
+    Callie("Sophia", 100),
     Floyd("Beezie", 100)
 ]
 
@@ -54,8 +54,8 @@ def test_play_detailed():
     round_3.expose_river()
     assert not round_3.table.river is None
     round_3.do_betting_round()
-    round_3.showdown()
-    round_3.settle_round()
+    winner = round_3.showdown()
+    round_3.settle_round(winner)
 
 # def test_gameflow():
 #     round.play()

@@ -19,10 +19,17 @@ class Table:
         self.small_blind_index = ( self.dealer_button_index - 2 ) % self.num_players
         self.active_player_index = ( self.dealer_button_index + 1 ) % self.num_players # play starts to the "right" of the dealer
 
+        self.bet_amount = self.big_blind # betting starts at the big blind amount
         # community cards
         self.flop = None
         self.turn = None
         self.river = None
+
+    def raise_bet(self, amount):
+        if amount > self.bet_amount:
+            self.bet_amount = amount
+        else:
+            raise Exception(f"Current Bet is {self.bet_amount}Cannot raise bet to a lessor amount {amount}")
 
     def next_turn(self):
         self.active_player_index = ( self.active_player_index + 1 ) % self.num_players
