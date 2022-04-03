@@ -148,6 +148,7 @@ class HoldemRound:
         player_hands = { player.name: player.best_hand(self.table) for player in self.players if not player.folded }
         best_hand = max([ player.best_hand(self.table) for player in self.players if not player.folded ])
         print(f"Winning Hand: {best_hand}")
+        print(f"{best_hand.describe()}: {best_hand}")
         winners = [ player for player in player_hands if player_hands[player] == best_hand ]
         print(winners)
 

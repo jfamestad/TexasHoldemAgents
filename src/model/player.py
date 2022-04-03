@@ -23,6 +23,7 @@ class Player:
         self.status = PlayerStatus()
         self.hole = []
         self._folded = False
+        self._best_hand = None
 
     def start_betting_round(self):
         self.has_bet = False
@@ -55,10 +56,11 @@ class Player:
     def _all_five_card_hands(self, cards):
         all_cards = self.hole
         all_cards.extend(cards)
+        print(f"{self.name} makes a hand from: {all_cards}")
         card_combinations = combinations(all_cards, 5)
-        print(f"Combinations: {card_combinations}")
+        #print(f"Combinations: {card_combinations}")
         hands = [ Hand(cards) for cards in card_combinations ]
-        print(f"Hands: {hands}")
+        #print(f"Hands: {hands}")
         return hands
 
     def best_hand(self, table, refresh=False):
@@ -67,6 +69,7 @@ class Player:
         if not ( self._best_hand or refresh ):
             cards_on_table = self.hole + table.flop + [table.turn] + [table.river]
             self._best_hand = max(self._all_five_card_hands(cards_on_table))
+        print(f"{self.name} presents hand: {self._best_hand}")
         return self._best_hand
 
     def collect_winnings(self, amount):
