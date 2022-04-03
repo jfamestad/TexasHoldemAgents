@@ -1,4 +1,5 @@
 from itertools import combinations
+from model.hand import Hand
 from model.action import Action, FOLD, CALL, RAISE, CHECK
 
 class PlayerStatus:
@@ -24,7 +25,7 @@ class Player:
         self._folded = False
 
     def start_betting_round(self):
-        pass
+        self.has_bet = False
 
     def process_action(self, action):
         print(f"Processing Action - {self.name}: {action.action_type}")
@@ -46,6 +47,7 @@ class Player:
     def deal_card(self, card):
         print(f"delt {self.name} to {card}")
         self.hole.append(card)
+        assert len(self.hole) <= 2
 
     def play(self, table):
         pass
@@ -53,13 +55,17 @@ class Player:
     def _all_five_card_hands(self, cards):
         all_cards = self.hole
         all_cards.extend(cards)
-        return combinations(all_cards, 5)
+        card_combinations = combinations(all_cards, 5)
+        print(f"Combinations: {card_combinations}")
+        hands = [ Hand(cards) for cards in card_combinations ]
+        print(f"Hands: {hands}")
+        return hands
 
     def best_hand(self, table, refresh=False):
         if self.folded:
             return None
         if not ( self._best_hand or refresh ):
-            cards_on_table = table.flop + [table.turn] + [table.river]
+            cards_on_table = self.hole + table.flop + [table.turn] + [table.river]
             self._best_hand = max(self._all_five_card_hands(cards_on_table))
         return self._best_hand
 

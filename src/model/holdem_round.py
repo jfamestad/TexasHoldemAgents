@@ -21,12 +21,16 @@ class HoldemRound:
 
     @property
     def active_player_count(self):
-        #print(f"active player count: {len([player for player in self.player_status if self.player_status[player]])}")
         return len(self.players_still_in)
 
     @property
     def players_still_in(self):
         return [player for player in self.player_status if self.player_status[player]]
+
+    @property
+    def all_players_have_bet(self):
+        players = self.players_still_in
+        return len([ player for player in players if not player.has_bet ]) == 0
 
     def deal(self):
         self.deck = Deck()
@@ -72,8 +76,9 @@ class HoldemRound:
         # todo: see whos still in and collect bets
 
     def handle_call(self, call, player):
-        self.is_called = True
-        print(f"{player.name} has called")
+        if self.all_players_have_bet:
+            self.is_called = True
+            print(f"{player.name} has called")
         # todo: process bet
         # todo: is the round over?
 
@@ -90,7 +95,7 @@ class HoldemRound:
 
         # handle whose turn it is and apply their action to the table and player
         calling_player_name = None
-        while not ( self.is_called or self.betting_round_complete ): # ( not self.is_called ) and ( self.active_player_count > 1 ):
+        while not ( self.is_called ): # ( not self.is_called ) and ( self.active_player_count > 1 ):
             #print(self.table)
             print(f"Active Player Index: {self.table.active_player_index}")
             active_player = self.players[self.table.active_player_index]
@@ -150,6 +155,8 @@ class HoldemRound:
             for winner in winners:
                 print(f"Multiple Winners...")
                 print(f"    Winner: {winner}")
+                player = [player for player in self.players if player.name == winner][0]
+                print(f"{player.name} hole: {player.hole}")
 
             print(f"Flop: {self.table.flop}")
             print(f"Turn: {self.table.turn}")
@@ -168,6 +175,8 @@ class HoldemRound:
         pass
 
     def play(self):
+        for player in self.players:
+            player.start_holdem_round()
         self.deal()
         self.do_betting_round()
         self.expose_flop()

@@ -40,6 +40,8 @@ round_3 = HoldemRound(
 )
 
 def test_play_detailed():
+    for player in players:
+        player.start_holdem_round()
     round_3.deal()
     assert round_3.table.flop is None
     round_3.do_betting_round()
