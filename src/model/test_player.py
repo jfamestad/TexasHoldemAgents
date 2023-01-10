@@ -1,6 +1,7 @@
 from model.player import Player
 from model.deck import Card
 from model.table import Table
+from model.action import Action
 
 def test_init():
     player = Player(
@@ -19,4 +20,19 @@ def test_init():
     player.deal_card(card2)
 
     table = Table(1, 4)
+
+    bankroll = player._bankroll
+    player.start_holdem_round()
+    player.place_small_blind(table)
+    assert player._bankroll == bankroll - table.small_blind
+
+    # bankroll = player._bankroll
+    # player.place_big_blind(table)
+    # assert player._bankroll == bankroll - table.big_blind
+
+    action = Action("CALL", 10)
+    bankroll = player._bankroll
+    player.start_holdem_round()
+    player.process_action(action)
+    assert player._bankroll == bankroll - action.amount
 

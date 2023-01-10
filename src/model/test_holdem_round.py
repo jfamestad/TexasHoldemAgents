@@ -58,8 +58,8 @@ def test_play_detailed():
     round_3.expose_river()
     assert not round_3.table.river is None
     round_3.do_betting_round()
-    winner = round_3.showdown()
-    round_3.settle_round(winner)
+    winners = round_3.showdown()
+    round_3.settle_round(winners)
 
 # def test_gameflow():
 #     round.play()

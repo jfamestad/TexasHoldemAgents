@@ -2,11 +2,13 @@ from model.table import Table
 
 num_players = 8
 
+
 def test_init():
     table = Table(1, num_players)
-    assert table.flop == None
-    assert table.turn == None
-    assert table.river == None
+    assert table.flop is None
+    assert table.turn is None
+    assert table.river is None
+
 
 def test_next_turn():
     table = Table(1, num_players)
@@ -17,6 +19,7 @@ def test_next_turn():
         assert table.active_player_index < num_players
         assert table.active_player_index >= 0
         table.next_turn()
+
 
 def test_next_round():
     table = Table(1, num_players)
@@ -31,4 +34,3 @@ def test_next_round():
         assert table.dealer_button_index < num_players
         assert table.dealer_button_index >= 0
         table.next_round()
-
