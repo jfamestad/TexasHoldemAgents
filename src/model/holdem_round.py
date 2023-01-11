@@ -145,6 +145,10 @@ class HoldemRound:
         # handle whose turn it is and apply their action to the table and player
         calling_player_name = None
         while not ( self.is_called ): # ( not self.is_called ) and ( self.active_player_count > 1 ):
+            whos_in = [player for player in self.players if not player.folded]
+            if len(whos_in) <=1:
+                print(f"{whos_in} wins by default")
+                break
             #print(self.table)
             # print(f"Active Player Index: {self.table.active_player_index}")
             active_player = self.players[self.table.active_player_index]

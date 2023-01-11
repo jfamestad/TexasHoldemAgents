@@ -1,7 +1,7 @@
 from model.tournament import Tournament
 from model.table import Table
 
-from model.holdem_round import HoldemRound
+
 from players.floyd_folds import Floyd
 from players.callie_calls import Callie
 from players.robby_random import Robby
@@ -18,6 +18,6 @@ players = [
     Floyd("Bob", 100)
 ]
 
-# def test_init():
-#     tournament = Tournament(players, 10)
-#     tournament.do_round()
+def test_init():
+    tournament = Tournament(players)
+    tournament.play()

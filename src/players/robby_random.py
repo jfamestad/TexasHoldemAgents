@@ -18,7 +18,7 @@ class Robby(Player):
                 else:
                     action = Action("FOLD")
         elif random_value < .33:
-            action = Action("CALL", table.bet_amount)
+            action = Action("CALL", min(table.bet_amount, self.max_bet))
         elif random_value < .67:
             action = Action("FOLD")
         else:
