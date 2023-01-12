@@ -21,7 +21,7 @@ class Player:
     def __init__(self, name, bankroll):
         self.name = name
         self._bankroll = bankroll
-        self.hole = []
+        self._hole = []
         self._best_hand = None
         # self._folded = False
 
@@ -53,12 +53,14 @@ class Player:
 
     def start_holdem_round(self):
         self.status = PlayerStatus()
-        self.hole = []
+        self._hole = []
         self._folded = False
         self._best_hand = None
 
     def place_small_blind(self, table):
         print(f"{self.name} is placing small blind: {table.small_blind}")
+        if self.status.money_on_table > 0:
+            raise Exception("Cannot place small blind when I already placed big blind")
         # self._bankroll -= table.small_blind
         self.add_chips(table.small_blind)
         print(f"{self.name} placed small blind: {self._bankroll} left in bankroll")
@@ -66,6 +68,8 @@ class Player:
 
     def place_big_blind(self, table):
         print(f"{self.name} is placing big blind: {table.big_blind}")
+        if self.status.money_on_table > 0:
+            raise Exception("Cannot place big blind when I already placed small blind")
         # self._bankroll -= table.big_blind
         self.add_chips(table.big_blind)
         print(f"{self.name} placed big blind: {self._bankroll} left in bankroll")
@@ -113,14 +117,14 @@ class Player:
 
     def deal_card(self, card):
         print(f"delt {self.name} to {card}")
-        self.hole.append(card)
-        assert len(self.hole) <= 2
+        self._hole.append(card)
+        assert len(self._hole) <= 2
 
     def play(self, table, is_called=False):
         pass
 
     def _all_five_card_hands(self, cards):
-        all_cards = self.hole
+        all_cards = self._hole
         all_cards.extend(cards)
         print(f"{self.name} makes a hand from: {all_cards}")
         card_combinations = combinations(all_cards, 5)
@@ -130,11 +134,11 @@ class Player:
         return hands
 
     def best_hand(self, table, refresh=False):
-        print(f"{self.name} is holding {self.hole}")
+        print(f"{self.name} is holding {self._hole}")
         if self.folded:
             return None
         if not (self._best_hand or refresh):
-            cards_on_table = self.hole + table.flop + [table.turn] + [table.river]
+            cards_on_table = table.flop + [table.turn] + [table.river]
             self._best_hand = max(self._all_five_card_hands(cards_on_table))
         print(f"{self.name} presents hand: {self._best_hand}")
         return self._best_hand

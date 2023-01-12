@@ -62,12 +62,17 @@ class Deck:
     _ranks = ranks
     _cards = [Card(rank, suit) for rank, suit in itertools.product(_ranks, _suits)]
 
+    # def __init__(self, random_seed=None):
+    #     self.random_seed = random_seed
+
     def shuffle(self):
         self._cards = random.sample(self._cards, len(self._cards))
 
     def draw_card(self):
+        cards_left = len(self._cards)
         card = self._cards[0]
         self._cards.remove(card)
+        assert len(self._cards) == cards_left - 1
         return card
 
     def draw_cards(self, count=1):

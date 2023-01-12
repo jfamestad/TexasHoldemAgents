@@ -11,11 +11,15 @@ class Table:
     def __init__(self, blind, num_players, dealer_button_index=0):
         self.big_blind = 2 * blind
         self.small_blind = blind
-        self.pot = []  # list of bet amounts including blinds
+        self.dealer_button_index = dealer_button_index
 
         # setup dealer, blinds, and first action
         self.num_players = num_players
-        self.dealer_button_index = dealer_button_index  # randomly assign someone as dealer
+        self.init_or_reset()
+
+    def init_or_reset(self):
+        self.pot = []  # list of bet amounts including blinds
+        self.dealer_button_index = self.dealer_button_index  # randomly assign someone as dealer
         self.big_blind_index = (self.dealer_button_index - 1) % self.num_players
         self.small_blind_index = (self.dealer_button_index - 2) % self.num_players
         self.active_player_index = (self.dealer_button_index + 1) % self.num_players  # play starts to the "right" of the dealer
@@ -24,6 +28,7 @@ class Table:
         self.flop = None
         self.turn = None
         self.river = None
+
 
     @property
     def pot_total(self):
