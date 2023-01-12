@@ -26,7 +26,7 @@ def test_deal():
     assert round.table.turn == None
     assert round.table.river == None
     for player in players:
-        assert len(player.hole) == 2
+        assert len(player._hole) == 2
 
 round_2 = HoldemRound(
     players=players,
@@ -59,7 +59,7 @@ def test_play_detailed():
     assert not round_3.table.river is None
     round_3.do_betting_round()
     winners = round_3.showdown()
-    round_3.settle_round(winners)
+    round_3.settle_round()
 
 # def test_gameflow():
 #     round.play()

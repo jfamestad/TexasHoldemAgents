@@ -19,5 +19,6 @@ players = [
 ]
 
 def test_init():
-    tournament = Tournament(players)
+    tournament = Tournament(players,
+                            tournament_id=1)
     tournament.play()
