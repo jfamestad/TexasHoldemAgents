@@ -14,7 +14,7 @@ class Robby(Player):
                     action = Action("FOLD")
             else:
                 if random_value > .5:
-                    action = Action("MATCH", self.bankroll + self.status.money_on_table, all_in=True)
+                    action = Action("MATCH", self.max_bet, all_in=True)
                 else:
                     action = Action("FOLD")
         elif random_value < .33:
@@ -23,10 +23,10 @@ class Robby(Player):
             action = Action("FOLD")
         else:
             print(f"{self.name} wants to raise. Current Bet is {table.bet_amount}, {self.name} has {self.bankroll}")
-            if self.bankroll + self.status.money_on_table > table.bet_amount:
-                action = Action("RAISE", random.randint(table.bet_amount + 1, self.bankroll + self.status.money_on_table))
+            if self.max_bet > table.bet_amount:
+                action = Action("RAISE", random.randint(table.bet_amount + 1, self.max_bet))
             else:
                 print(f"<> {self.name} is all in <>")
-                action = Action("CALL", self.bankroll + self.status.money_on_table, all_in=True)
+                action = Action("CALL", self.max_bet, all_in=True)
         print(f"Play - {self.name}: {action.action_type}")
         return action

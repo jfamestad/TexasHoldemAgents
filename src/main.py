@@ -20,7 +20,7 @@ players = [
 
 if __name__ == '__main__':
     winners = []
-    for i in range(100):
+    for i in range(1000):
         new_players = [copy.deepcopy(player) for player in players]
         tournament = Tournament(
             players=new_players,

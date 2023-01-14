@@ -1,5 +1,6 @@
 import random
 import math
+import logging
 
 from model.table import Table
 from model.deck import Deck
@@ -35,13 +36,13 @@ class HoldemRound:
     @property
     def active_player_count(self):
         count = len(self.players_still_in)
-        print(f"Player still in count: {count}")
+        logging.debug(f"Player still in count: {count}")
         return count
 
     @property
     def players_still_in(self):
         still_in = [player.name for player in self.players if not player.folded]
-        print(f"Still in: {still_in}")
+        logging.debug(f"Still in: {still_in}")
         return [player.name for player in self.players if not player.folded]
 
     @property
@@ -69,7 +70,7 @@ class HoldemRound:
         self.table.river = self.deck.draw()
 
     def handle_action(self, action, active_player):
-        print(f"handling action: {action}")
+        logging.debug(f"handling action: {action}")
         self.table.pot.append(active_player.process_action(action))
         if action.action_type == CALL:
             self.handle_call(action, active_player)
@@ -86,10 +87,10 @@ class HoldemRound:
 
     def handle_check(self, check, player):
         # check is noop
-        print(f"{player.name} checks")
+        logging.debug(f"{player.name} checks")
 
     def handle_raise(self, raise_, player): # 'raise' is a Python reserved keyword
-        print(f"{player.name} raises")
+        logging.debug(f"{player.name} raises")
         self.table.raise_bet(raise_.amount)
         if raise_.all_in:
             self.handle_all_in(raise_, player)
@@ -101,7 +102,7 @@ class HoldemRound:
         if self.all_players_have_bet:
             if not self.is_called:
                 self.calling_player_name = player.name
-            print(f"{player.name} calls, setting holdem_round.is_called = True")
+            logging.debug(f"{player.name} calls, setting holdem_round.is_called = True")
             self.is_called = True
         if call.all_in:
             self.handle_all_in(call, player)
@@ -113,7 +114,7 @@ class HoldemRound:
             self.handle_all_in(match, player)
 
     def handle_fold(self, fold, player):
-        print(f"{player.name} folds")
+        logging.debug(f"{player.name} folds")
         #self.player_status[player.name] = False
         if self.active_player_count <= 1:
             self.betting_round_complete = True
@@ -125,8 +126,8 @@ class HoldemRound:
                 self.split_pot(action, player)
 
     def split_pot(self, action, player):
-        print(f"Splitting pot - {player.name} is all in")
-        print(f"Players: {self.players_still_in}")
+        logging.debug(f"Splitting pot - {player.name} is all in")
+        logging.debug(f"Players: {self.players_still_in}")
         self._split_pot = [
             {
                 "players": self.players_still_in,
@@ -140,10 +141,10 @@ class HoldemRound:
 
     def handle_push(self, players):
         # settle round with multiple winners
-        print(f"Handling Push - {players}")
+        logging.debug(f"Handling Push - {players}")
 
     def do_betting_round(self):
-        print("Starting betting round")
+        logging.debug("Starting betting round")
         # print("initializing holdem_round.is_called = False")
         self.is_called = False
         self.betting_round_complete = False
@@ -154,7 +155,7 @@ class HoldemRound:
         while not ( self.is_called ): # ( not self.is_called ) and ( self.active_player_count > 1 ):
             whos_in = [player for player in self.players if not player.folded]
             if len(whos_in) <=1:
-                print(f"{whos_in} wins by default")
+                logging.debug(f"{whos_in} wins by default")
                 break
             #print(self.table)
             # print(f"Active Player Index: {self.table.active_player_index}")
@@ -164,9 +165,9 @@ class HoldemRound:
             #print(active_player.folded)
             #print(self.betting_round_complete)
             if not active_player.folded:
-                print(f"The bet is {self.table.bet_amount} to {active_player.name}")
+                logging.debug(f"The bet is {self.table.bet_amount} to {active_player.name}")
                 action = active_player.play(self.table)
-                print(f"Got action: {action}")
+                logging.debug(f"Got action: {action}")
                 self.handle_action(action, active_player)
                 # todo: apply action to players pot
                 # if action == CALL:
@@ -175,9 +176,9 @@ class HoldemRound:
             #self.players[self.table.active_player_index] = active_player
             self.table.next_turn()
 
-        print("Betting is called...settling up with  remaining players")
+        logging.debug("Betting is called...settling up with  remaining players")
         players_still_in = [player.name for player in self.players if not player.folded]
-        print(f"Players still in: {players_still_in}")
+        logging.debug(f"Players still in: {players_still_in}")
 
         if self.active_player_count <= 1:
             self.betting_round_complete = True
@@ -197,21 +198,21 @@ class HoldemRound:
             active_player = self.players[self.table.active_player_index]
         while not active_player.name == self.calling_player_name:
             if self.active_player_count < 2:
-                print(f"Only one player is remains...winner by default")
+                logging.debug(f"Only one player is remains...winner by default")
                 break
             # print(f"Active Player: {active_player.name} - Calling Player: {self.calling_player_name}")
             active_player = self.players[self.table.active_player_index]
-            print(f"Round is called. Match or Fold to {active_player.name}")
+            logging.debug(f"Round is called. Match or Fold to {active_player.name}")
             if not active_player.folded:
-                print(f"Called - Active Player: {active_player.name}")
+                logging.debug(f"Called - Active Player: {active_player.name}")
                 action = active_player.play(self.table, is_called=True)
                 self.handle_action(action, active_player)
             self.table.next_turn()
             active_player = self.players[self.table.active_player_index]
 
-            print("Betting round is complete")
+            logging.debug("Betting round is complete")
             players_still_in = [player.name for player in self.players if not player.folded]
-            print(f"Players still in: {players_still_in}")
+            logging.debug(f"Players still in: {players_still_in}")
 
             # go around the table and top up bets from players who are still in
 
@@ -219,19 +220,19 @@ class HoldemRound:
         #best_hands = [ player.best_hand(self.table) for player in self.players if not player.folded ]
         player_hands = {player.name: player.best_hand(self.table) for player in self.players if not player.folded}
         best_hand = max([player.best_hand(self.table, refresh=True) for player in self.players if not player.folded])
-        print(f"Winning Hand: {best_hand}")
-        print(f"{best_hand.describe()}: {best_hand}")
+        logging.info(f"Winning Hand: {best_hand}")
+        logging.info(f"{best_hand.describe()}: {best_hand}")
         winners = [ player for player in player_hands if player_hands[player] == best_hand ]
-        print(winners)
+        logging.info(winners)
 
-        print(f"Flop: {self.table.flop}")
-        print(f"Turn: {self.table.turn}")
-        print(f"River: {self.table.river}")
+        logging.info(f"Flop: {self.table.flop}")
+        logging.info(f"Turn: {self.table.turn}")
+        logging.info(f"River: {self.table.river}")
 
         if len(winners) > 1:
             for winner in winners:
-                print(f"Multiple Winners...")
-                print(f"    Winner: {winner}")
+                logging.info(f"Multiple Winners...")
+                logging.info(f"    Winner: {winner}")
                 player = [player for player in self.players if player.name == winner][0]
                 # print(f"{player.name} hole: {player.hole}")
 
@@ -262,12 +263,12 @@ class HoldemRound:
         #     winner.bankroll += self.table.pot
 
     def collect_blinds(self):
-        print(f"Collecting blinds")
+        logging.debug(f"Collecting blinds")
         self.table.pot.append(self.players[self.table.big_blind_index].place_big_blind(self.table))
         self.table.pot.append(self.players[self.table.small_blind_index].place_small_blind(self.table))
 
     def play(self):
-        print(f"Playing round with {len(self.players)} players")
+        logging.info(f"Playing round with {len(self.players)} players")
         assert len(self.players) > 1
         for player in self.players:
             player.start_holdem_round()

@@ -7,6 +7,15 @@ from players.callie_calls import Callie
 from players.robby_random import Robby
 from players.ricky_raise import Ricky
 
+# not_enough_players = [
+#     Ricky("Josh", 0),
+#     Callie("Madi", 100)
+# ]
+#
+# t = Tournament(not_enough_players,
+#                tournament_id=1)
+# t.play()
+
 players = [
     Ricky("Josh", 100),
     Robby("Cody", 100),
