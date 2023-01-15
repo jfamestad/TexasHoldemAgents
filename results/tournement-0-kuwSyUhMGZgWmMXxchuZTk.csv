@@ -1,0 +1,4 @@
+,pot_size,winners,winner_personas,winning_hand,all_hands,round_number
+0,573,['Madi'],['Callie Calls'],"4H, 3H, 9H, 2H, 5C","{'Madi': Hand([Card(""4"", ""Hearts""), Card(""3"", ""Hearts""), Card(""9"", ""Hearts""), Card(""2"", ""Hearts""), Card(""5"", ""Clubs"")]), 'Sophia': Hand([Card(""Q"", ""Diamonds""), Card(""7"", ""Hearts""), Card(""A"", ""Diamonds""), Card(""9"", ""Hearts""), Card(""7"", ""Clubs"")])}",0
+1,24,['Madi'],['Callie Calls'],"10H, 10S, 8D, 8S, 7S","{'Madi': Hand([Card(""10"", ""Hearts""), Card(""10"", ""Spades""), Card(""8"", ""Diamonds""), Card(""8"", ""Spades""), Card(""7"", ""Spades"")])}",1
+2,21,['Madi'],['Callie Calls'],"7S, KH, 6S, AD, 9H","{'Madi': Hand([Card(""7"", ""Spades""), Card(""K"", ""Hearts""), Card(""6"", ""Spades""), Card(""A"", ""Diamonds""), Card(""9"", ""Hearts"")])}",2

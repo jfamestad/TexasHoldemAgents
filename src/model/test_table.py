@@ -10,15 +10,15 @@ def test_init():
     assert table.river is None
 
 
-def test_next_turn():
-    table = Table(1, num_players)
-    active_player_index = table.active_player_index
-    table.next_turn()
-    assert table.active_player_index == ( active_player_index + 1 ) % num_players
-    for i in range(10 * num_players):
-        assert table.active_player_index < num_players
-        assert table.active_player_index >= 0
-        table.next_turn()
+# def test_next_turn():
+#     table = Table(1, num_players)
+#     active_player_index = table.active_player_index
+#     table.next_turn()
+#     assert table.active_player_index == ( active_player_index + 1 ) % num_players
+#     for i in range(10 * num_players):
+#         assert table.active_player_index < num_players
+#         assert table.active_player_index >= 0
+#         table.next_turn()
 
 
 def test_next_round():

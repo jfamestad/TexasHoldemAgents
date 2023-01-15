@@ -1,10 +1,14 @@
+import random
+import logging
+
 from model.player import Player
 from model.action import Action
-import random
 
 
 class Robby(Player):
-    def play(self, table, is_called=False):
+    persona = "Robbie Random"
+
+    def play(self, table, player_status, is_called=False):
         random_value = random.random()
         if is_called:
             if self.max_bet > table.bet_amount:
@@ -22,11 +26,11 @@ class Robby(Player):
         elif random_value < .67:
             action = Action("FOLD")
         else:
-            print(f"{self.name} wants to raise. Current Bet is {table.bet_amount}, {self.name} has {self.bankroll}")
+            logging.debug(f"{self.name} wants to raise. Current Bet is {table.bet_amount}, {self.name} has {self.bankroll}")
             if self.max_bet > table.bet_amount:
                 action = Action("RAISE", random.randint(table.bet_amount + 1, self.max_bet))
             else:
-                print(f"<> {self.name} is all in <>")
+                logging.debug(f"<> {self.name} is all in <>")
                 action = Action("CALL", self.max_bet, all_in=True)
-        print(f"Play - {self.name}: {action.action_type}")
+        logging.debug(f"Play - {self.name}: {action.action_type}")
         return action

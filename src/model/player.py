@@ -128,8 +128,11 @@ class Player:
         self._hole.append(card)
         assert len(self._hole) <= 2
 
-    def play(self, table, is_called=False):
-        pass
+    def play(self, table, player_status, is_called=False):
+        pass # Players implement this function to define the Actions they play
+
+    def check_results(self, table, results):
+        pass # Players can implement this function to inspect the end state of each round.
 
     def _all_five_card_hands(self, cards):
         all_cards = self._hole
