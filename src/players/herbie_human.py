@@ -56,3 +56,4 @@ class Herbie(Player):
 
     def check_results(self, table, results):
         pprint(results)
+        print()

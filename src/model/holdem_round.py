@@ -266,10 +266,12 @@ class HoldemRound:
     def showdown(self):
         #best_hands = [ player.best_hand(self.table) for player in self.players if not player.folded ]
         player_hands = {player.name: player.best_hand(self.table) for player in self.players if not player.folded}
-        self.winning_hand = max([player.best_hand(self.table, refresh=True) for player in self.players if not player.folded])
-        logging.debug(f"Winning Hand: {self.winning_hand}")
-        logging.debug(f"{self.winning_hand.describe()}: {self.winning_hand}")
+        print(player_hands)
+        self.winning_hand = max([player_hands[player.name] for player in self.players if not player.folded])
+        logging.info(f"Winning Hand: {self.winning_hand}")
+        print(f"{self.winning_hand.describe()}: {self.winning_hand}")
         winners = [ player for player in player_hands if player_hands[player] == self.winning_hand ]
+        assert len(winners) >= 1 # should be at least one winner
         logging.debug(winners)
 
         logging.debug(f"Flop: {self.table.flop}")

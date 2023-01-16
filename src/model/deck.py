@@ -80,8 +80,8 @@ class Deck:
         for i in range(count):
             if len(self._cards) == 0:
                 raise Exception("Cannot draw card. No cards left in deck")
-            card = self._cards[0]
-            self._cards.remove(card)
+            # card = self._cards[0]
+            card = self._cards.pop(0)
             cards.append(card)
         return cards
 

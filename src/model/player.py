@@ -148,9 +148,9 @@ class Player:
         logging.debug(f"{self.name} is holding {self._hole}")
         if self.folded:
             return None
-        if not (self._best_hand or refresh):
-            cards_on_table = table.flop + [table.turn] + [table.river]
-            self._best_hand = max(self._all_five_card_hands(cards_on_table))
+        # if not (self._best_hand or refresh):
+        cards_on_table = table.flop + [table.turn] + [table.river]
+        self._best_hand = max(self._all_five_card_hands(cards_on_table))
         logging.debug(f"{self.name} presents hand: {self._best_hand}")
         return self._best_hand
 

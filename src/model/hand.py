@@ -77,14 +77,14 @@ class Hand:
             return False
 
         if 2 in hand_ranks and 14 in hand_ranks:
-            # Have an Ace and a King (14, 13) so we should check for Ace low straight
+            # Have an Ace and a 2 (14, 2) so we should check for Ace low straight
             # instead of Ace high
             hand_ranks.discard(14)
             hand_ranks.add(1)
             self._ace_low = True
 
         low_card = min(hand_ranks)
-        for i in range(4):
+        for i in range(5):
             if not ((low_card + i) in hand_ranks):
                 return False
         return True
