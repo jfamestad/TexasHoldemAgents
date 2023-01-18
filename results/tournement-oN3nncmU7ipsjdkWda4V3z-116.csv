@@ -1,0 +1,30 @@
+,pot_size,winners,winner_personas,winning_hand,all_hands,round_number
+0,698,['Madi'],['Callie Calls'],"QD, JD, JS, 7D, 10H","{'Madi': Hand([Card(""Q"", ""Diamonds""), Card(""J"", ""Diamonds""), Card(""J"", ""Spades""), Card(""7"", ""Diamonds""), Card(""10"", ""Hearts"")]), 'Sophia': Hand([Card(""2"", ""Diamonds""), Card(""2"", ""Spades""), Card(""J"", ""Spades""), Card(""7"", ""Diamonds""), Card(""10"", ""Hearts"")])}",0
+1,3,['Madi'],['Callie Calls'],"KD, QC, 7C, 8C, 10S","{'Madi': Hand([Card(""K"", ""Diamonds""), Card(""Q"", ""Clubs""), Card(""7"", ""Clubs""), Card(""8"", ""Clubs""), Card(""10"", ""Spades"")])}",1
+2,3,['Madi'],['Callie Calls'],"JH, JD, 10C, 7S, QC","{'Madi': Hand([Card(""J"", ""Hearts""), Card(""J"", ""Diamonds""), Card(""10"", ""Clubs""), Card(""7"", ""Spades""), Card(""Q"", ""Clubs"")])}",2
+3,3,['Madi'],['Callie Calls'],"4D, 6C, 5C, 7C, 3S","{'Madi': Hand([Card(""4"", ""Diamonds""), Card(""6"", ""Clubs""), Card(""5"", ""Clubs""), Card(""7"", ""Clubs""), Card(""3"", ""Spades"")])}",3
+4,3,['Madi'],['Callie Calls'],"KH, 4H, 7S, 8C, 4C","{'Madi': Hand([Card(""K"", ""Hearts""), Card(""4"", ""Hearts""), Card(""7"", ""Spades""), Card(""8"", ""Clubs""), Card(""4"", ""Clubs"")])}",4
+5,3,['Madi'],['Callie Calls'],"7S, 9D, 9S, 4D, 8H","{'Madi': Hand([Card(""7"", ""Spades""), Card(""9"", ""Diamonds""), Card(""9"", ""Spades""), Card(""4"", ""Diamonds""), Card(""8"", ""Hearts"")])}",5
+6,3,['Madi'],['Callie Calls'],"QH, 7S, KS, 7D, JS","{'Madi': Hand([Card(""Q"", ""Hearts""), Card(""7"", ""Spades""), Card(""K"", ""Spades""), Card(""7"", ""Diamonds""), Card(""J"", ""Spades"")])}",6
+7,3,['Madi'],['Callie Calls'],"AD, JC, 7C, JH, KC","{'Madi': Hand([Card(""A"", ""Diamonds""), Card(""J"", ""Clubs""), Card(""7"", ""Clubs""), Card(""J"", ""Hearts""), Card(""K"", ""Clubs"")])}",7
+8,3,['Madi'],['Callie Calls'],"JH, KC, AS, 6C, JD","{'Madi': Hand([Card(""J"", ""Hearts""), Card(""K"", ""Clubs""), Card(""A"", ""Spades""), Card(""6"", ""Clubs""), Card(""J"", ""Diamonds"")])}",8
+9,3,['Madi'],['Callie Calls'],"2C, KD, 9D, JC, 2H","{'Madi': Hand([Card(""2"", ""Clubs""), Card(""K"", ""Diamonds""), Card(""9"", ""Diamonds""), Card(""J"", ""Clubs""), Card(""2"", ""Hearts"")])}",9
+10,3,['Madi'],['Callie Calls'],"AS, AH, 10S, 5C, 7H","{'Madi': Hand([Card(""A"", ""Spades""), Card(""A"", ""Hearts""), Card(""10"", ""Spades""), Card(""5"", ""Clubs""), Card(""7"", ""Hearts"")])}",10
+11,6,['Madi'],['Callie Calls'],"8C, 7S, 2D, 2C, 8S","{'Madi': Hand([Card(""8"", ""Clubs""), Card(""7"", ""Spades""), Card(""2"", ""Diamonds""), Card(""2"", ""Clubs""), Card(""8"", ""Spades"")])}",11
+12,6,['Madi'],['Callie Calls'],"8C, QS, QD, 7S, JD","{'Madi': Hand([Card(""8"", ""Clubs""), Card(""Q"", ""Spades""), Card(""Q"", ""Diamonds""), Card(""7"", ""Spades""), Card(""J"", ""Diamonds"")])}",12
+13,6,['Madi'],['Callie Calls'],"QC, 8S, KC, JS, 7C","{'Madi': Hand([Card(""Q"", ""Clubs""), Card(""8"", ""Spades""), Card(""K"", ""Clubs""), Card(""J"", ""Spades""), Card(""7"", ""Clubs"")])}",13
+14,6,['Madi'],['Callie Calls'],"QH, JD, 8S, 10H, 6D","{'Madi': Hand([Card(""Q"", ""Hearts""), Card(""J"", ""Diamonds""), Card(""8"", ""Spades""), Card(""10"", ""Hearts""), Card(""6"", ""Diamonds"")])}",14
+15,6,['Madi'],['Callie Calls'],"6D, AH, 10D, 6C, AD","{'Madi': Hand([Card(""6"", ""Diamonds""), Card(""A"", ""Hearts""), Card(""10"", ""Diamonds""), Card(""6"", ""Clubs""), Card(""A"", ""Diamonds"")])}",15
+16,6,['Madi'],['Callie Calls'],"2H, QC, QS, KH, 2C","{'Madi': Hand([Card(""2"", ""Hearts""), Card(""Q"", ""Clubs""), Card(""Q"", ""Spades""), Card(""K"", ""Hearts""), Card(""2"", ""Clubs"")])}",16
+17,6,['Madi'],['Callie Calls'],"8D, 8C, QD, 10H, 7C","{'Madi': Hand([Card(""8"", ""Diamonds""), Card(""8"", ""Clubs""), Card(""Q"", ""Diamonds""), Card(""10"", ""Hearts""), Card(""7"", ""Clubs"")])}",17
+18,6,['Madi'],['Callie Calls'],"9S, 8S, 6D, QD, QS","{'Madi': Hand([Card(""9"", ""Spades""), Card(""8"", ""Spades""), Card(""6"", ""Diamonds""), Card(""Q"", ""Diamonds""), Card(""Q"", ""Spades"")])}",18
+19,6,['Madi'],['Callie Calls'],"KS, 10D, QS, QD, 9H","{'Madi': Hand([Card(""K"", ""Spades""), Card(""10"", ""Diamonds""), Card(""Q"", ""Spades""), Card(""Q"", ""Diamonds""), Card(""9"", ""Hearts"")])}",19
+20,6,['Madi'],['Callie Calls'],"5S, AC, 9D, 7C, QC","{'Madi': Hand([Card(""5"", ""Spades""), Card(""A"", ""Clubs""), Card(""9"", ""Diamonds""), Card(""7"", ""Clubs""), Card(""Q"", ""Clubs"")])}",20
+21,12,['Madi'],['Callie Calls'],"JC, QD, 10C, 10S, KH","{'Madi': Hand([Card(""J"", ""Clubs""), Card(""Q"", ""Diamonds""), Card(""10"", ""Clubs""), Card(""10"", ""Spades""), Card(""K"", ""Hearts"")])}",21
+22,12,['Madi'],['Callie Calls'],"2C, AS, 4S, 3C, 5S","{'Madi': Hand([Card(""2"", ""Clubs""), Card(""A"", ""Spades""), Card(""4"", ""Spades""), Card(""3"", ""Clubs""), Card(""5"", ""Spades"")])}",22
+23,12,['Madi'],['Callie Calls'],"8S, 3D, AC, 10S, 3H","{'Madi': Hand([Card(""8"", ""Spades""), Card(""3"", ""Diamonds""), Card(""A"", ""Clubs""), Card(""10"", ""Spades""), Card(""3"", ""Hearts"")])}",23
+24,12,['Madi'],['Callie Calls'],"KH, 10H, 8D, 9D, 8H","{'Madi': Hand([Card(""K"", ""Hearts""), Card(""10"", ""Hearts""), Card(""8"", ""Diamonds""), Card(""9"", ""Diamonds""), Card(""8"", ""Hearts"")])}",24
+25,12,['Madi'],['Callie Calls'],"3H, 4C, 2D, 5C, 6S","{'Madi': Hand([Card(""3"", ""Hearts""), Card(""4"", ""Clubs""), Card(""2"", ""Diamonds""), Card(""5"", ""Clubs""), Card(""6"", ""Spades"")])}",25
+26,12,['Madi'],['Callie Calls'],"QS, 7S, JD, JS, AS","{'Madi': Hand([Card(""Q"", ""Spades""), Card(""7"", ""Spades""), Card(""J"", ""Diamonds""), Card(""J"", ""Spades""), Card(""A"", ""Spades"")])}",26
+27,12,['Madi'],['Callie Calls'],"3D, 7C, 3S, AD, 9C","{'Madi': Hand([Card(""3"", ""Diamonds""), Card(""7"", ""Clubs""), Card(""3"", ""Spades""), Card(""A"", ""Diamonds""), Card(""9"", ""Clubs"")])}",27
+28,12,['Madi'],['Callie Calls'],"5C, KS, 3C, 3S, 5H","{'Madi': Hand([Card(""5"", ""Clubs""), Card(""K"", ""Spades""), Card(""3"", ""Clubs""), Card(""3"", ""Spades""), Card(""5"", ""Hearts"")])}",28

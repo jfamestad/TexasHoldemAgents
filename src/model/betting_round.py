@@ -51,7 +51,7 @@ class BettingRound:
 
         while not (self.is_called and self.all_players_have_bet):  # ( not self.is_called ) and ( self.active_player_count > 1 ):
             whos_in = [player for player in self.players if not player.folded]
-            print(f"Whos in? {whos_in}")
+            # print(f"Whos in? {whos_in}")
             if len(whos_in) <= 1:
                 logging.debug(f"{whos_in} wins by default")
                 break # only one player remains...theyll win this round
@@ -59,7 +59,7 @@ class BettingRound:
             # We have at least two players
             # lets see whos turn it is...
             active_player = self.players[self.table.active_player_index]
-            print(f"Active player: {active_player}")
+            # print(f"Active player: {active_player}")
 
             # skip them if they're folded
             if not active_player.folded:
@@ -68,6 +68,7 @@ class BettingRound:
                 logging.debug(f"The bet is {self.table.bet_amount} to {active_player.name}")
 
                 action = active_player.play(self.table, player_status)
+                print(f"{active_player.name}: {action}")
                 logging.debug(f"Got action: {action}")
 
                 # handle the players action
@@ -109,6 +110,7 @@ class BettingRound:
         # print(f"{player.name} calls...have all players bet?")
         if self.all_players_have_bet:
             if not self.is_called:
+                print(f"{player.name} has called the round")
                 self.calling_player_name = player.name
             logging.debug(f"{player.name} calls, setting holdem_round.is_called = True")
             self.is_called = True

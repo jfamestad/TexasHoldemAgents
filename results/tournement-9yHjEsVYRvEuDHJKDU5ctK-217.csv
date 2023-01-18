@@ -1,0 +1,30 @@
+,pot_size,winners,winner_personas,winning_hand,all_hands,round_number
+0,686,['Sophia'],['Callie Calls'],"3D, KD, 8H, KC, 3S","{'Madi': Hand([Card(""A"", ""Spades""), Card(""K"", ""Diamonds""), Card(""8"", ""Hearts""), Card(""7"", ""Diamonds""), Card(""K"", ""Clubs"")]), 'Sophia': Hand([Card(""3"", ""Diamonds""), Card(""K"", ""Diamonds""), Card(""8"", ""Hearts""), Card(""K"", ""Clubs""), Card(""3"", ""Spades"")])}",0
+1,23,['Sophia'],['Callie Calls'],"QD, 5D, 10S, 5S, 10C","{'Sophia': Hand([Card(""Q"", ""Diamonds""), Card(""5"", ""Diamonds""), Card(""10"", ""Spades""), Card(""5"", ""Spades""), Card(""10"", ""Clubs"")])}",1
+2,5,['Sophia'],['Callie Calls'],"AS, 8S, QS, 6C, 9H","{'Sophia': Hand([Card(""A"", ""Spades""), Card(""8"", ""Spades""), Card(""Q"", ""Spades""), Card(""6"", ""Clubs""), Card(""9"", ""Hearts"")])}",2
+3,3,['Sophia'],['Callie Calls'],"5D, 5H, 9C, KS, JD","{'Sophia': Hand([Card(""5"", ""Diamonds""), Card(""5"", ""Hearts""), Card(""9"", ""Clubs""), Card(""K"", ""Spades""), Card(""J"", ""Diamonds"")])}",3
+4,3,['Sophia'],['Callie Calls'],"6D, 6S, AD, KD, KH","{'Sophia': Hand([Card(""6"", ""Diamonds""), Card(""6"", ""Spades""), Card(""A"", ""Diamonds""), Card(""K"", ""Diamonds""), Card(""K"", ""Hearts"")])}",4
+5,3,['Sophia'],['Callie Calls'],"AH, 8D, 5C, 8H, 6D","{'Sophia': Hand([Card(""A"", ""Hearts""), Card(""8"", ""Diamonds""), Card(""5"", ""Clubs""), Card(""8"", ""Hearts""), Card(""6"", ""Diamonds"")])}",5
+6,3,['Sophia'],['Callie Calls'],"7C, AH, 2D, 2C, JC","{'Sophia': Hand([Card(""7"", ""Clubs""), Card(""A"", ""Hearts""), Card(""2"", ""Diamonds""), Card(""2"", ""Clubs""), Card(""J"", ""Clubs"")])}",6
+7,3,['Sophia'],['Callie Calls'],"JS, 9H, 9S, 2H, 2C","{'Sophia': Hand([Card(""J"", ""Spades""), Card(""9"", ""Hearts""), Card(""9"", ""Spades""), Card(""2"", ""Hearts""), Card(""2"", ""Clubs"")])}",7
+8,3,['Sophia'],['Callie Calls'],"3D, 7D, 9S, 10H, 3H","{'Sophia': Hand([Card(""3"", ""Diamonds""), Card(""7"", ""Diamonds""), Card(""9"", ""Spades""), Card(""10"", ""Hearts""), Card(""3"", ""Hearts"")])}",8
+9,3,['Sophia'],['Callie Calls'],"8D, 3C, QH, 10S, 3D","{'Sophia': Hand([Card(""8"", ""Diamonds""), Card(""3"", ""Clubs""), Card(""Q"", ""Hearts""), Card(""10"", ""Spades""), Card(""3"", ""Diamonds"")])}",9
+10,3,['Sophia'],['Callie Calls'],"JH, JS, QC, KH, JC","{'Sophia': Hand([Card(""J"", ""Hearts""), Card(""J"", ""Spades""), Card(""Q"", ""Clubs""), Card(""K"", ""Hearts""), Card(""J"", ""Clubs"")])}",10
+11,6,['Sophia'],['Callie Calls'],"KS, AS, AC, AH, 7H","{'Sophia': Hand([Card(""K"", ""Spades""), Card(""A"", ""Spades""), Card(""A"", ""Clubs""), Card(""A"", ""Hearts""), Card(""7"", ""Hearts"")])}",11
+12,6,['Sophia'],['Callie Calls'],"QD, JH, 10C, KH, AS","{'Sophia': Hand([Card(""Q"", ""Diamonds""), Card(""J"", ""Hearts""), Card(""10"", ""Clubs""), Card(""K"", ""Hearts""), Card(""A"", ""Spades"")])}",12
+13,6,['Sophia'],['Callie Calls'],"10D, 9H, 10C, 8H, 5C","{'Sophia': Hand([Card(""10"", ""Diamonds""), Card(""9"", ""Hearts""), Card(""10"", ""Clubs""), Card(""8"", ""Hearts""), Card(""5"", ""Clubs"")])}",13
+14,6,['Sophia'],['Callie Calls'],"10D, AD, 6C, 6S, 10C","{'Sophia': Hand([Card(""10"", ""Diamonds""), Card(""A"", ""Diamonds""), Card(""6"", ""Clubs""), Card(""6"", ""Spades""), Card(""10"", ""Clubs"")])}",14
+15,6,['Sophia'],['Callie Calls'],"AH, 4S, 5C, 3D, 2C","{'Sophia': Hand([Card(""A"", ""Hearts""), Card(""4"", ""Spades""), Card(""5"", ""Clubs""), Card(""3"", ""Diamonds""), Card(""2"", ""Clubs"")])}",15
+16,6,['Sophia'],['Callie Calls'],"5S, 10S, JS, AS, 7S","{'Sophia': Hand([Card(""5"", ""Spades""), Card(""10"", ""Spades""), Card(""J"", ""Spades""), Card(""A"", ""Spades""), Card(""7"", ""Spades"")])}",16
+17,6,['Sophia'],['Callie Calls'],"6C, 8H, 7C, 9H, 10D","{'Sophia': Hand([Card(""6"", ""Clubs""), Card(""8"", ""Hearts""), Card(""7"", ""Clubs""), Card(""9"", ""Hearts""), Card(""10"", ""Diamonds"")])}",17
+18,6,['Sophia'],['Callie Calls'],"2H, 2C, QC, JS, 10S","{'Sophia': Hand([Card(""2"", ""Hearts""), Card(""2"", ""Clubs""), Card(""Q"", ""Clubs""), Card(""J"", ""Spades""), Card(""10"", ""Spades"")])}",18
+19,6,['Sophia'],['Callie Calls'],"7S, AC, QS, QH, 7H","{'Sophia': Hand([Card(""7"", ""Spades""), Card(""A"", ""Clubs""), Card(""Q"", ""Spades""), Card(""Q"", ""Hearts""), Card(""7"", ""Hearts"")])}",19
+20,6,['Sophia'],['Callie Calls'],"4D, QD, JH, 4C, 10S","{'Sophia': Hand([Card(""4"", ""Diamonds""), Card(""Q"", ""Diamonds""), Card(""J"", ""Hearts""), Card(""4"", ""Clubs""), Card(""10"", ""Spades"")])}",20
+21,12,['Sophia'],['Callie Calls'],"KH, 10C, 5S, 6C, AC","{'Sophia': Hand([Card(""K"", ""Hearts""), Card(""10"", ""Clubs""), Card(""5"", ""Spades""), Card(""6"", ""Clubs""), Card(""A"", ""Clubs"")])}",21
+22,12,['Sophia'],['Callie Calls'],"AH, 10C, 8H, 6C, 7D","{'Sophia': Hand([Card(""A"", ""Hearts""), Card(""10"", ""Clubs""), Card(""8"", ""Hearts""), Card(""6"", ""Clubs""), Card(""7"", ""Diamonds"")])}",22
+23,12,['Sophia'],['Callie Calls'],"4H, QS, 8C, 4C, AD","{'Sophia': Hand([Card(""4"", ""Hearts""), Card(""Q"", ""Spades""), Card(""8"", ""Clubs""), Card(""4"", ""Clubs""), Card(""A"", ""Diamonds"")])}",23
+24,12,['Sophia'],['Callie Calls'],"AC, 10H, 9H, 10S, 9S","{'Sophia': Hand([Card(""A"", ""Clubs""), Card(""10"", ""Hearts""), Card(""9"", ""Hearts""), Card(""10"", ""Spades""), Card(""9"", ""Spades"")])}",24
+25,12,['Sophia'],['Callie Calls'],"KC, 9S, 6H, 9C, QC","{'Sophia': Hand([Card(""K"", ""Clubs""), Card(""9"", ""Spades""), Card(""6"", ""Hearts""), Card(""9"", ""Clubs""), Card(""Q"", ""Clubs"")])}",25
+26,12,['Sophia'],['Callie Calls'],"5C, JH, 5H, 3S, 5D","{'Sophia': Hand([Card(""5"", ""Clubs""), Card(""J"", ""Hearts""), Card(""5"", ""Hearts""), Card(""3"", ""Spades""), Card(""5"", ""Diamonds"")])}",26
+27,12,['Sophia'],['Callie Calls'],"KD, QC, AS, JH, QS","{'Sophia': Hand([Card(""K"", ""Diamonds""), Card(""Q"", ""Clubs""), Card(""A"", ""Spades""), Card(""J"", ""Hearts""), Card(""Q"", ""Spades"")])}",27
+28,12,['Sophia'],['Callie Calls'],"8H, QD, AH, JD, 10H","{'Sophia': Hand([Card(""8"", ""Hearts""), Card(""Q"", ""Diamonds""), Card(""A"", ""Hearts""), Card(""J"", ""Diamonds""), Card(""10"", ""Hearts"")])}",28

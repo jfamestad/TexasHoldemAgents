@@ -39,7 +39,7 @@ class Table:
 
     def next_turn(self):
         self.active_player_index = (self.active_player_index + 1) % self.num_players
-        print(f"Advanced active player index to {self.active_player_index}")
+        # print(f"Advanced active player index to {self.active_player_index}")
 
     def raise_blinds(self):
         self.big_blind *= 2

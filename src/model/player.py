@@ -52,6 +52,23 @@ class Player:
     def games_played(self):
         return self._games_played
 
+    def get_game_phase(self, table):
+        if not (table.flop or table.turn or table.river):
+            print("First betting round")
+            return 1
+        elif table.flop and not (table.turn or table.river):
+            print("Second betting round, after the flop")
+            return 2
+        elif table.flop and table.turn and not table.river:
+            print("Third betting round, after the turn")
+            return 3
+        elif table.flop and table.turn and table.river:
+            print("Final betting round, after the river")
+            return 4
+        else:
+            print(f"Debug: {table.flop} - {table.turn} - {table.river}")
+            raise ValueError("Invalid table state - bad combination of visible public cards")
+
     def add_chips(self, amount):
         if amount > self.bankroll:
             raise ValueError(f"Cannot add more ({amount}) chips than {self.name} has in bankroll ({self.bankroll}).")
@@ -161,3 +178,40 @@ class Player:
     @property
     def bankroll(self):
         return self._bankroll
+
+    def call(self, table):
+        # Helper function to call with checks for bet amount against your bet amount
+        print(f"{self.name} stays in the game")
+        if self.max_bet > table.bet_amount:
+            action = Action("CALL", table.bet_amount)
+            return action
+        else:
+            logging.debug(f"{self.name} is all in")
+            logging.debug(
+                f"{self.name} has {self.bankroll} in the bank and {self.status.money_on_table} on the table")
+            action = Action("CALL", self.max_bet, all_in=True)
+            return action
+
+    def _raise(self, table, amount=None):
+        if amount == None:
+            bet_amount = self.max_bet
+        else:
+            bet_amount = amount
+
+        all_in = bet_amount == self.max_bet
+
+        if bet_amount >= bet_amount:
+            print(f"{self.name} doesnt have enough to raise, calling instead")
+            return self.call(table)
+
+        if bet_amount == table.bet_amount:
+            return self.call(table)
+
+        print(f"{self.name} raises to {bet_amount}")
+
+        action = Action("RAISE", bet_amount, all_in=all_in)
+        return action
+
+    def fold(self):
+        action = Action("FOLD")
+        return action

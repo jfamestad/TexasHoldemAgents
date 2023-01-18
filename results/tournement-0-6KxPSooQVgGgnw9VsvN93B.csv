@@ -1,7 +1,0 @@
-,pot_size,winners,winner_personas,winning_hand,all_hands,round_number
-0,670,['Josh'],['Herbie Human'],"KH, QH, 9S, 10C, JD","{'Madi': Hand([Card(""7"", ""Diamonds""), Card(""J"", ""Hearts""), Card(""7"", ""Clubs""), Card(""10"", ""Clubs""), Card(""J"", ""Diamonds"")]), 'Josh': Hand([Card(""K"", ""Hearts""), Card(""Q"", ""Hearts""), Card(""9"", ""Spades""), Card(""10"", ""Clubs""), Card(""J"", ""Diamonds"")]), 'Sophia': Hand([Card(""7"", ""Hearts""), Card(""9"", ""Spades""), Card(""7"", ""Clubs""), Card(""10"", ""Clubs""), Card(""J"", ""Diamonds"")])}",0
-1,54,['Josh'],['Herbie Human'],"QH, KH, 7C, JC, QC","{'Josh': Hand([Card(""Q"", ""Hearts""), Card(""K"", ""Hearts""), Card(""7"", ""Clubs""), Card(""J"", ""Clubs""), Card(""Q"", ""Clubs"")])}",1
-2,3,['Beezie'],['Ricky Raise'],"6C, 2D, 6H, 2C, KC","{'Beezie': Hand([Card(""6"", ""Clubs""), Card(""2"", ""Diamonds""), Card(""6"", ""Hearts""), Card(""2"", ""Clubs""), Card(""K"", ""Clubs"")])}",2
-3,5,['Beezie'],['Ricky Raise'],"7S, QH, AH, 8C, JS","{'Beezie': Hand([Card(""7"", ""Spades""), Card(""Q"", ""Hearts""), Card(""A"", ""Hearts""), Card(""8"", ""Clubs""), Card(""J"", ""Spades"")])}",3
-4,8,['Josh'],['Herbie Human'],"4S, KH, QS, QH, 4H","{'Josh': Hand([Card(""4"", ""Spades""), Card(""K"", ""Hearts""), Card(""Q"", ""Spades""), Card(""Q"", ""Hearts""), Card(""4"", ""Hearts"")])}",4
-5,3,['Josh'],['Herbie Human'],"JC, JD, KS, 10C, KD","{'Josh': Hand([Card(""J"", ""Clubs""), Card(""J"", ""Diamonds""), Card(""K"", ""Spades""), Card(""10"", ""Clubs""), Card(""K"", ""Diamonds"")])}",5

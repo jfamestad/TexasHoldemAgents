@@ -30,4 +30,4 @@ class Action:
         self.all_in = all_in
 
     def __str__(self):
-        return f"Action({self.action_type}, {self.amount})"
+        return f"Action({self.action_type}, {self.amount}, {self.all_in})"

@@ -14,6 +14,7 @@ class Tournament:
         self.tournament_id = tournament_id
         self.round_results = []
         self.results_dir = results_dir
+        self._uuid = shortuuid.uuid()
 
     @property
     def num_players(self, big_blind=2):
@@ -50,7 +51,7 @@ class Tournament:
 
     def write_tournament_results(self):
         df = pd.DataFrame(self.round_results)
-        filename = f"tournement-{self.tournament_id}-{shortuuid.uuid()}.csv"
+        filename = f"tournement-{self._uuid}-{self.tournament_id}.csv"
         filepath = os.path.join(self.results_dir, filename)
         logging.debug(f"Writing tournament results to csv: {filepath}")
         os.makedirs(self.results_dir,
