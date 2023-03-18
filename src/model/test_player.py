@@ -26,10 +26,6 @@ def test_init():
     player.place_small_blind(table)
     assert player._bankroll == bankroll - table.small_blind
 
-    # bankroll = player._bankroll
-    # player.place_big_blind(table)
-    # assert player._bankroll == bankroll - table.big_blind
-
     action = Action("CALL", 10)
     bankroll = player._bankroll
     player.start_holdem_round()

@@ -193,19 +193,26 @@ class Player:
             return action
 
     def _raise(self, table, amount=None):
-        if amount == None:
+        # if no amount is given, player is going all-in
+        if amount is None:
             bet_amount = self.max_bet
         else:
             bet_amount = amount
 
-        all_in = bet_amount == self.max_bet
+        # set all_in flag,
+        # we havent made sure player can afford it yet so they might be trying to bet more than they have
+        all_in = bet_amount >= self.max_bet
 
-        if bet_amount >= bet_amount:
-            print(f"{self.name} doesnt have enough to raise, calling instead")
-            return self.call(table)
+        if table.bet_amount >= bet_amount:
+            # validate that this is indeed a raise
+            if all_in:
+                print(f"{self.name} doesnt have enough to raise, calling instead")
+                return self.call(table)
+            else:
+                raise ValueError(f"Cannot raise from {table.bet_amount} to a lower bet of {amount}")
 
-        if bet_amount == table.bet_amount:
-            return self.call(table)
+        # if bet_amount == table.bet_amount:
+        #     return self.call(table)
 
         print(f"{self.name} raises to {bet_amount}")
 
