@@ -13,26 +13,27 @@ from model.tournament import Tournament
 players = [
     # Ricky("Alice", 100),
     # Robby("Cody", 100),
-    # Ricky("Beezie", 100),
+    Ricky("Beezie", 100),
     # Callie("Madi", 100),
     # Herbie("Josh", 100),
     # Robby("Michelle", 100),
     # Johnny("Johnny", 100),
     # Callie("Sophia", 100),
-    Johnny("Alice", 100),
+    # Johnny("Alice", 100),
     Johnny("Cody", 100),
-    Johnny("Beezie", 100),
+    # Johnny("Beezie", 100),
     Johnny("Madi", 100),
-    Herbie("Josh", 100),
+    # Herbie("Josh", 100),
     Robby("Michelle", 100),
     Johnny("Johnny", 100),
     Callie("Sophia", 100),
-    # Floyd("Bob", 100)
+    Floyd("Bob", 100)
 ]
 
 if __name__ == '__main__':
     winners = []
-    for i in range(1):
+    for i in range(10):
+        print(f"Starting round {i}")
         new_players = [copy.deepcopy(player) for player in players]
         tournament = Tournament(
             players=new_players,
