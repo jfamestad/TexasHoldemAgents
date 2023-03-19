@@ -21,9 +21,12 @@ class Ricky(Player):
         if is_called:
             action = Action("MATCH", min(table.bet_amount, self.max_bet))
         elif self.bankroll > table.bet_amount and self.raise_count < self.raise_limit:
-            max_raise = min(self.bankroll, self.max_bet)
             min_raise = table.bet_amount + 1
-            action = Action("RAISE", random.randint(min_raise, max_raise))
+            if min_raise >= self.max_bet:
+                bet_amount = self.max_bet
+            else:
+                bet_amount = random.randint(min_raise, self.max_bet)
+            action = self._raise(table, bet_amount)
             self.raise_count += 1
         else:
             action = Action("FOLD")
