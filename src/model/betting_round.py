@@ -21,8 +21,8 @@ class BettingRound:
         player_bankrolls_total = sum([player.bankroll for player in self.players])
         total = self.table.pot_total + player_bankrolls_total
         print(f"Current Total: {total}")
-        if (not total is None) and (total > 1100):
-            raise Exception("New Money detected in game")
+        # if (not total is None) and (total > 1100):
+        #     raise Exception("New Money detected in game")
         if self._last_total_money is None:
             print(f"First check of money supply. Nonevalue ok {self._last_total_money}")
             self._last_total_money = total
