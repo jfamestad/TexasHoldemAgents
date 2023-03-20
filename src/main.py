@@ -12,9 +12,9 @@ from players.johnny_jacks import Johnny
 from model.tournament import Tournament
 
 players = [
-    # Ricky("Alice", 100),
+    Ricky("Alice", 100),
     Robby("Cody", 100),
-    # Ricky("Beezie", 100),
+    Ricky("Beezie", 100),
     # Callie("Madi", 100),
     Johnny("Josh", 100),
     # Robby("Michelle", 100),
@@ -33,7 +33,7 @@ players = [
 
 if __name__ == '__main__':
     winners = []
-    for i in range(10):
+    for i in range(500):
         print(f"Starting round {i}")
         new_players = [copy.deepcopy(player) for player in players]
         tournament = Tournament(

@@ -23,9 +23,11 @@ class Table:
         self.bet_amount = self.big_blind  # betting starts at the big blind amount
         self.new_betting_round()
 
+    def payout(self):
+        self.pot = []
+
     def new_betting_round(self):
         self.active_player_index = (self.dealer_button_index + 1) % self.num_players  # play starts to the "right" of the dealer
-
 
     @property
     def pot_total(self):
