@@ -36,6 +36,8 @@ class Tournament:
         self.players, self.table = holdem_round.play()
         results = holdem_round.results
         results["round_number"] = 0
+        results["tournament_id"] = self.tournament_id
+        results["tournament_uuid"] = self._uuid
         self.round_results.append(results)
 
     def do_round(self, round_number):
@@ -47,6 +49,8 @@ class Tournament:
         self.players, self.table = holdem_round.play()
         results = holdem_round.results
         results["round_number"] = round_number
+        results["tournament_id"] = self.tournament_id
+        results["tournament_uuid"] = self._uuid
         self.round_results.append(results)
 
     def write_tournament_results(self):
