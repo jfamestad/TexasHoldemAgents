@@ -1,6 +1,10 @@
 class Table:
     """
     The table object represents the observable game state for players to use in determining their play
+
+    todo: add a property that returns the fields a player needs instead of passing the whole table to them
+    - this is needed because a player could call methods on the table like new_holdem_round() otherwise
+
     """
 
     def __init__(self, blind, num_players, dealer_button_index=0):
