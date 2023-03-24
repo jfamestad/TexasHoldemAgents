@@ -1,2 +1,5 @@
 model/__pycache__/
 __pycache__/
+results/**
+.DS_Store
+**/.DS_Store

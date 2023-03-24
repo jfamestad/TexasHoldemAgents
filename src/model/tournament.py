@@ -51,6 +51,7 @@ class Tournament:
         results["round_number"] = round_number
         results["tournament_id"] = self.tournament_id
         results["tournament_uuid"] = self._uuid
+        results["player_count"] = self.count_still_in
         self.round_results.append(results)
 
     def write_tournament_results(self):
@@ -66,14 +67,14 @@ class Tournament:
         # Play rounds until only one player remains
         self.do_first_round()
         # players = [player for player in self.players if player.bankroll > self.tables[0].big_blind] # blinds will all move together
-        count_still_in = len(self.players_still_in(self.table.big_blind))
+        self.count_still_in = len(self.players_still_in(self.table.big_blind))
         round_counter = 1
-        while count_still_in >= 2:
-            logging.debug(f"Starting round with players: {self.players_still_in(self.table.big_blind)} last: {count_still_in}")
+        while self.count_still_in >= 2:
+            logging.debug(f"Starting round with players: {self.players_still_in(self.table.big_blind)} last: {self.count_still_in}")
             self.do_round(round_counter)
             if round_counter % 10 == 0:
                 self.table.raise_blinds()
-            count_still_in = len(self.players_still_in(self.table.big_blind))
+            self.count_still_in = len(self.players_still_in(self.table.big_blind))
             logging.debug(self.players)
             round_counter += 1
         high_score = max([player.bankroll for player in self.players_still_in(self.table.big_blind)])

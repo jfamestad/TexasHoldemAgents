@@ -26,13 +26,13 @@ class Johnny(Player):
 
     def play(self, table, player_status, is_called=False):
         logging.debug(f"{self.name} sees the bet is at: {table.bet_amount}")
-        print(f"{self.name} has {self._hole} in the hole")
-        print(f"{self.name} has {self.bankroll} in the bankroll")
-        print(f"{self.name} has can bet at most {self.max_bet}")
+        # print(f"{self.name} has {self._hole} in the hole")
+        # print(f"{self.name} has {self.bankroll} in the bankroll")
+        # print(f"{self.name} has can bet at most {self.max_bet}")
         has_jack_or_better = max(self._hole).rank in JACKS_OR_BETTER
-        print(f"{self.name}'s high card is Jack or better? {has_jack_or_better}")
+        # print(f"{self.name}'s high card is Jack or better? {has_jack_or_better}")
         betting_round = self.get_game_phase(table)
-        print(betting_round)
+        # print(betting_round)
 
         if betting_round == 1:
             if not has_jack_or_better:

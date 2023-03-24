@@ -15,23 +15,23 @@ class BettingRound:
         self.all_in_players = []
         self._last_total_money = None
 
-    def check_money_supply(self):
-        # total money = pot_total + sum of all player bankrolls
-        print(f"Checking money supply for change. Last value: {self._last_total_money}")
-        player_bankrolls_total = sum([player.bankroll for player in self.players])
-        total = self.table.pot_total + player_bankrolls_total
-        print(f"Current Total: {total}")
-        # if (not total is None) and (total > 1100):
-        #     raise Exception("New Money detected in game")
-        if self._last_total_money is None:
-            print(f"First check of money supply. Nonevalue ok {self._last_total_money}")
-            self._last_total_money = total
-        else:
-            if not self._last_total_money == total:
-                print(f"New money detected. Change in total money in game: {self._last_total_money}")
-                raise
-        self._last_total_money = total
-        return self._last_total_money
+    # def check_money_supply(self):
+    #     # total money = pot_total + sum of all player bankrolls
+    #     print(f"Checking money supply for change. Last value: {self._last_total_money}")
+    #     player_bankrolls_total = sum([player.bankroll for player in self.players])
+    #     total = self.table.pot_total + player_bankrolls_total
+    #     print(f"Current Total: {total}")
+    #     # if (not total is None) and (total > 1100):
+    #     #     raise Exception("New Money detected in game")
+    #     if self._last_total_money is None:
+    #         print(f"First check of money supply. Nonevalue ok {self._last_total_money}")
+    #         self._last_total_money = total
+    #     else:
+    #         if not self._last_total_money == total:
+    #             print(f"New money detected. Change in total money in game: {self._last_total_money}")
+    #             raise
+    #     self._last_total_money = total
+    #     return self._last_total_money
 
     def reset_active_player_index(self):
         self.table.new_betting_round()
@@ -99,6 +99,7 @@ class BettingRound:
 
     def handle_action(self, action, active_player):
         logging.debug(f"handling action: {action}")
+        print(f"{active_player.name}: {action}")
         # self.check_money_supply()
         self.table.pot.append(active_player.process_action(action))
         if action.action_type == CALL:

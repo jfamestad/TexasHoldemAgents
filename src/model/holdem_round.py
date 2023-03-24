@@ -77,10 +77,10 @@ class HoldemRound:
         logging.debug("Starting betting round")
         print(f"Do the preround money check")
         betting_round = BettingRound(self.table, self.players)
-        betting_round.check_money_supply()
+        # betting_round.check_money_supply()
         self.players, self.table = betting_round.do_round()
         print("Checking post round money supply")
-        betting_round.check_money_supply()
+        # betting_round.check_money_supply()
 
     def showdown(self):
         #best_hands = [ player.best_hand(self.table) for player in self.players if not player.folded ]
@@ -132,31 +132,31 @@ class HoldemRound:
                 # self.check_total_money()
             # print(f"Checking after players all settle up")
             # self.check_total_money()
-            self.table.payout()
             self.players[i].check_results(self.table, self.results)
             # print("Checking after letting players check results")
             # self.check_total_money()
+        self.table.payout()
 
     def collect_blinds(self):
         logging.debug(f"Collecting blinds")
         self.table.pot.append(self.players[self.table.big_blind_index].place_big_blind(self.table))
         self.table.pot.append(self.players[self.table.small_blind_index].place_small_blind(self.table))
 
-    def check_total_money(self):
-        print(f"Checking money supply for change. Last value: {self._last_total_money}")
-        total = sum([player.bankroll for player in self.players]) + self.table.pot_total
-        print(f"Current Total: {total}")
-        # if (not total is None) and (total > 1100):
-        #     raise Exception("New Money detected in game")
-        if self._last_total_money is None:
-            print(f"First check of money supply. Nonevalue ok {self._last_total_money}")
-            self._last_total_money = total
-        else:
-            if not self._last_total_money == total:
-                print(f"New money detected. Change in total money in game: {self._last_total_money}")
-                raise Exception("New Money detected in game")
-        self._last_total_money = total
-        return self._last_total_money
+    # def check_total_money(self):
+    #     print(f"Checking money supply for change. Last value: {self._last_total_money}")
+    #     total = sum([player.bankroll for player in self.players]) + self.table.pot_total
+    #     print(f"Current Total: {total}")
+    #     # if (not total is None) and (total > 1100):
+    #     #     raise Exception("New Money detected in game")
+    #     if self._last_total_money is None:
+    #         print(f"First check of money supply. Nonevalue ok {self._last_total_money}")
+    #         self._last_total_money = total
+    #     else:
+    #         if not self._last_total_money == total:
+    #             print(f"New money detected. Change in total money in game: {self._last_total_money}")
+    #             raise Exception("New Money detected in game")
+    #     self._last_total_money = total
+    #     return self._last_total_money
 
     def play(self):
         logging.debug(f"Playing round with {len(self.players)} players")
