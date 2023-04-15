@@ -22,6 +22,7 @@ class Herbie(Player):
         prompt = "Enter: c | r | f: "
         action_type_response = input(prompt)
         print(f"Got Action: {action_type_response}")
+        print()
 
         if not action_type_response in action_types.keys():
             # raise ValueError(f"Invalid Action Type: {action_type_response}. Valid responses: c | r | f")

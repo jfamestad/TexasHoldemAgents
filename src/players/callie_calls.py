@@ -6,6 +6,11 @@ from model.action import Action
 class Callie(Player):
     persona = "Callie Calls"
 
+    def __init__(self, name, bankroll, raise_limit=3):
+        super().__init__(name, bankroll)
+        self.raise_count = 0
+        self.raise_limit = raise_limit
+
     def play(self, table, player_status, is_called=False):
         logging.debug(f"{self.name} sees the bet is at: {table.bet_amount}")
         if self.max_bet > table.bet_amount:

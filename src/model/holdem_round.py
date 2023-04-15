@@ -142,21 +142,21 @@ class HoldemRound:
         self.table.pot.append(self.players[self.table.big_blind_index].place_big_blind(self.table))
         self.table.pot.append(self.players[self.table.small_blind_index].place_small_blind(self.table))
 
-    # def check_total_money(self):
-    #     print(f"Checking money supply for change. Last value: {self._last_total_money}")
-    #     total = sum([player.bankroll for player in self.players]) + self.table.pot_total
-    #     print(f"Current Total: {total}")
-    #     # if (not total is None) and (total > 1100):
-    #     #     raise Exception("New Money detected in game")
-    #     if self._last_total_money is None:
-    #         print(f"First check of money supply. Nonevalue ok {self._last_total_money}")
-    #         self._last_total_money = total
-    #     else:
-    #         if not self._last_total_money == total:
-    #             print(f"New money detected. Change in total money in game: {self._last_total_money}")
-    #             raise Exception("New Money detected in game")
-    #     self._last_total_money = total
-    #     return self._last_total_money
+    def check_total_money(self):
+        print(f"Checking money supply for change. Last value: {self._last_total_money}")
+        total = sum([player.bankroll for player in self.players]) + self.table.pot_total
+        print(f"Current Total: {total}")
+        # if (not total is None) and (total > 1100):
+        #     raise Exception("New Money detected in game")
+        if self._last_total_money is None:
+            print(f"First check of money supply. Nonevalue ok {self._last_total_money}")
+            self._last_total_money = total
+        else:
+            if not self._last_total_money == total:
+                print(f"New money detected. Change in total money in game: {self._last_total_money}")
+                raise Exception("New Money detected in game")
+        self._last_total_money = total
+        return self._last_total_money
 
     def play(self):
         logging.debug(f"Playing round with {len(self.players)} players")
@@ -174,15 +174,15 @@ class HoldemRound:
         self.expose_turn()
         self.do_betting_round()
         self.expose_river()
-        # print("Checking before betting round after river")
-        # self.check_total_money()
+        print("Checking before betting round after river")
+        self.check_total_money()
         self.do_betting_round()
-        # print("Checking before showdown")
-        # self.check_total_money()
+        print("Checking before showdown")
+        self.check_total_money()
         self.showdown()
-        # print("Checking before settle")
-        # self.check_total_money()
+        print("Checking before settle")
+        self.check_total_money()
         self.settle_round()
-        # print("Checking after settle")
-        # self.check_total_money()
+        print("Checking after settle")
+        self.check_total_money()
         return self.players, self.table

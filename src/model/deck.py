@@ -1,6 +1,7 @@
 import itertools
 import random
 
+
 suits = ["Hearts", "Clubs", "Spades", "Diamonds"]
 
 ranks = {
@@ -20,7 +21,7 @@ ranks = {
 }
 
 
-class Card:
+class Card(dict):
     _suits = suits
     _ranks = ranks
 

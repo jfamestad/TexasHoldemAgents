@@ -1,3 +1,5 @@
+import json
+
 class Table:
     """
     The table object represents the observable game state for players to use in determining their play
@@ -16,6 +18,12 @@ class Table:
         self.num_players = num_players
         self.new_holdem_round()
 
+    def __str__(self):
+        return json.dumps(self.__dict__)
+
+    def __repr__(self):
+        return self.__str__()
+
     def new_holdem_round(self):
         self.pot = []  # list of bet amounts including blinds
         self.flop = None
@@ -29,6 +37,7 @@ class Table:
 
     def payout(self):
         self.pot = []
+        self.bet_amount = 0
 
     def new_betting_round(self):
         self.active_player_index = (self.dealer_button_index + 1) % self.num_players  # play starts to the "right" of the dealer
