@@ -11,12 +11,14 @@ from players.stuart_stats import Stuart
 from players.paula_pairs import Paula
 from players.johnny_jacks import Johnny
 from players.chad_gpt import Chad
+from players.claude import Claude
 from model.tournament import Tournament
 
 players = [
     Ricky("Alice", 100),
     Robby("Cody", 100),
     Chad("Chad", 100),
+    Claude("Claude", 100),
     Callie("Baxter", 100),
     # Ricky("Julio", 100),
     # Robby("Michelle", 100),

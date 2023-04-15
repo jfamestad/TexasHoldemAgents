@@ -1,27 +1,21 @@
-# import pprint
+import pprint
 import json
 
-# import sys
-# from langchain.chat_models import ChatOpenAI
-from langchain.llms import OpenAI
-# from langchain.agents import load_tools, initialize_agent
-# from langchain.utilities import GoogleSerperAPIWrapper
-#
-# from langchain.chains import LLMChain
-# from langchain.prompts import PromptTemplate
+import sys
+from langchain.llms import Anthropic
+# from langchain import PromptTemplate, LLMChain
 
 from model.player import Player
 from model.action import Action
 
-class Chad(Player):
-    persona = "Chad Gipiti"
+class Claude(Player):
+    persona = "Claude"
 
     def __init__(self, name, bankroll, raise_limit=3, temperature=.5, verbose=False):
         super().__init__(name, bankroll)
         self.raise_count = 0
         self.raise_limit = raise_limit
-        self.llm = OpenAI(temperature=temperature,
-                     verbose=verbose)
+        self.llm = llm = Anthropic() # todo: we arent passing temperature yet...
 
     def render_prompt(self, game_state):
 
@@ -30,9 +24,9 @@ class Chad(Player):
         prompt += """
 This is a simulation and is not being played for real money. Assume the role of the player Chad. 
 
-Chad is a tough opponent. He's a shrewd player prone to bluff when the pot ratio is good and plays a good hand strong.
-Chad is also strategic. Chad does not want to lose and knows going ALL IN and losing means losing the whole tournament.
-Chad will go all in, but only when he's really confident, or really desperate.
+Claude is a tough opponent. He plays a calculated game always thinking about next moves.
+Claude is also strategic. Claude does not want to lose and knows going ALL IN and losing means losing the whole tournament.
+Claude will go all in, but only when he's really confident, or really desperate.
 
 What is Chad's next move? Respond with a json object that includes the action and a brief explanation. 
 
@@ -52,6 +46,7 @@ Do not include anything outside of the json object. The response should be only 
 """
         prompt += f"Your maximum bet is {self.max_bet}\n"
         prompt += "You cannot bet more than your maximum bet. If your bet is equal to the max, you are ALL IN.\n"
+        prompt += "Even if the Amount is 0, just include it in the json response anyway.\n"
         # prompt += f"The minimum amount you can RAISE is {game_state['table'].bet_amount}"
 
         return prompt
@@ -81,12 +76,12 @@ Do not include anything outside of the json object. The response should be only 
         print("LLM Decision")
         print(llm_decision)
 
-        action_params = json.loads(llm_decision)
+        action_params = json.loads(llm_decision) # todo: add retry logic in case the response doesn't fit downstream reads
         print(action_params)
 
         if action_params['Action'] == "RAISE":
             # Check for mis-raise thats actually a call
-            if int(table.bet_amount) == int(min(action_params['Amount'], self.max_bet)):
+            if int(table.bet_amount) >= int(min(action_params['Amount'], self.max_bet)):
                 action_params['Action'] = "CALL" # flip it
 
-        return Action(action_params['Action'], min(action_params['Amount'], self.max_bet))
+        return Action(action_params['Action'], min(int(action_params['Amount']), self.max_bet))
