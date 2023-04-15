@@ -7,26 +7,28 @@ from players.callie_calls import Callie
 from players.robby_random import Robby
 from players.ricky_raise import Ricky
 from players.herbie_human import Herbie
+from players.stuart_stats import Stuart
 from players.paula_pairs import Paula
 from players.johnny_jacks import Johnny
+from players.chad_gpt import Chad
 from model.tournament import Tournament
 
 players = [
     Ricky("Alice", 100),
     Robby("Cody", 100),
-    Ricky("Beezie", 100),
+    Chad("Chad", 100),
     Callie("Baxter", 100),
     # Ricky("Julio", 100),
     # Robby("Michelle", 100),
     # Johnny("Johnny", 100),
     # Callie("Sophia", 100),
-    Johnny("Alice", 100),
+    # Stuart("Alice", 100),
     Paula("Paula", 100),
-    # Johnny("Beezie", 100),
-    Johnny("Madi", 100),
-    Herbie("Josh", 100),
+    Johnny("Beezie", 100),
+    # Johnny("Madi", 100),
+    # Herbie("Josh", 100),
     Robby("Michelle", 100),
-    Johnny("Johnny", 100),
+    # Johnny("Johnny", 100),
     Callie("Sophia", 100),
     # Floyd("Bob", 100)
 ]
