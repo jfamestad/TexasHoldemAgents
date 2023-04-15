@@ -32,3 +32,48 @@ Run the simulation
 ```angular2html
 python3 main.py
 ```
+
+### Players
+
+Currently, Texas Holdem Agents implements these agents.
+
+#### Chad Gipiti
+
+Chad Gipiti is powered by OpenAI's API's. The state of the 
+game is passed in a prompt to ChatGPT with instructions
+to return it's response in json format. 
+
+#### Claude
+
+Clause is powered by Anthropic's API's. The state of the 
+game is passed in a prompt to Claude with instructions
+to return it's response in json format. 
+
+#### Callie Calls
+
+Callie Calls is a rules based player that will attempt to 
+always CALL.
+
+#### Ricky Raise
+
+Ricky Raise is a rules based player that will attempt to
+always RAISE
+
+#### Robbie Random
+
+Robbie Random is a rules based player that will play a 
+random action
+
+#### Floyd Folds
+
+Floyd Folds is a rules based player that will always FOLD
+
+#### Paula Pairs
+
+Paula Pairs is a rules based player that will play any pair
+
+#### Johnny Jacks
+
+Johnny Jacks is a rules based player that will attempt to
+play hands with Jacks or Better
+
