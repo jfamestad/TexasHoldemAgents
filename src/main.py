@@ -17,7 +17,7 @@ from model.tournament import Tournament
 players = [
     Ricky("Alice", 100),
     Robby("Cody", 100),
-    Chad("Chad", 100),
+    Chad("Chad", 100, temperature=.75),
     Claude("Claude", 100),
     Callie("Baxter", 100),
     # Ricky("Julio", 100),

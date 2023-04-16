@@ -38,7 +38,7 @@ The response should be in the form:
     "Explanation": detailed_explanation
 }
 
-Valid actions are CHECK CALL RAISE FOLD MATCH
+Valid actions are CHECK CALL RAISE FOLD MATCH and they are case sensitive (must be all caps!!)
 
 Make sure you use CALL if you're betting the same as the current amount
 
@@ -68,8 +68,8 @@ Do not include anything outside of the json object. The response should be only 
         # print()
 
         prompt = self.render_prompt(str(game_state))
-        print("Prompt:")
-        print(prompt)
+        # print("Prompt:")
+        # print(prompt)
 
         llm_decision = self.llm(prompt)
 
@@ -79,9 +79,9 @@ Do not include anything outside of the json object. The response should be only 
         action_params = json.loads(llm_decision) # todo: add retry logic in case the response doesn't fit downstream reads
         print(action_params)
 
-        if action_params['Action'] == "RAISE":
+        if 'Action' in action_params.keys() and action_params['Action'] == "RAISE":
             # Check for mis-raise thats actually a call
             if int(table.bet_amount) >= int(min(action_params['Amount'], self.max_bet)):
                 action_params['Action'] = "CALL" # flip it
 
-        return Action(action_params['Action'], min(int(action_params['Amount']), self.max_bet))
+        return Action(action_params['Action'].strip(), min(int(int(action_params['Amount'] if 'Amount' in action_params else 0)), self.max_bet))
