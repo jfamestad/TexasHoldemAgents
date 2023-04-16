@@ -22,7 +22,10 @@ class Action:
                 raise Exception(f"Invalid MATCH, RAISE or CALL amount (None)")
         else:
             if action_type in [CHECK, FOLD]:
-                raise Exception(f"Invalid CHECK or FOLD")
+                print(f"Got Action Type: [{action_type}]")
+                if amount and (int(amount) > 0):
+                    print(f"Got amount: [{amount}]")
+                    raise Exception(f"Invalid CHECK or FOLD")
             if amount < 0:
                 raise ValueError(f"Cannot {action_type} by a negative number: {amount}")
         self.action_type = action_type
