@@ -51,6 +51,18 @@ Do not include anything outside of the json object. The response should be only 
 
         return prompt
 
+    def decide(self, game_state):
+        prompt = self.render_prompt(str(game_state))
+        llm_decision = self.llm(prompt)
+
+        print("LLM Decision")
+        print(llm_decision)
+        action_params = json.loads(
+            llm_decision)  # todo: add retry logic in case the response doesn't fit downstream reads
+        print(action_params)
+        cleaned_response = "{" + llm_decision.split("{")[1].split('}')[0] + "}"
+        return json.loads(cleaned_response)
+
     def play(self, table, player_status, is_called=False):
         print(f"{self.name} is figuring out their next play...")
 
@@ -63,21 +75,16 @@ Do not include anything outside of the json object. The response should be only 
             "max_bet": self.max_bet,
         }
 
-        # print()
-        # pprint.pprint(game_state)
-        # print()
 
-        prompt = self.render_prompt(str(game_state))
-        # print("Prompt:")
-        # print(prompt)
+        # prompt = self.render_prompt(str(game_state))
+        # llm_decision = self.llm(prompt)
+        #
+        # print("LLM Decision")
+        # print(llm_decision)
+        # action_params = json.loads(llm_decision) # todo: add retry logic in case the response doesn't fit downstream reads
+        # print(action_params)
 
-        llm_decision = self.llm(prompt)
-
-        print("LLM Decision")
-        print(llm_decision)
-
-        action_params = json.loads(llm_decision) # todo: add retry logic in case the response doesn't fit downstream reads
-        print(action_params)
+        action_params = self.decide(game_state)
 
         if 'Action' in action_params.keys() and action_params['Action'] == "RAISE":
             # Check for mis-raise thats actually a call
