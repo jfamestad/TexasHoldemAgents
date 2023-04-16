@@ -45,7 +45,7 @@ to return it's response in json format.
 
 #### Claude
 
-Clause is powered by Anthropic's API's. The state of the 
+Claude is powered by Anthropic's API's. The state of the 
 game is passed in a prompt to Claude with instructions
 to return it's response in json format. 
 
