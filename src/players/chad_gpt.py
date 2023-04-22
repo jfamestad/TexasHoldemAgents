@@ -22,6 +22,7 @@ class Chad(Player):
         self.raise_limit = raise_limit
         self.llm = OpenAI(temperature=temperature,
                      verbose=verbose)
+        self.verbose = verbose
 
     def render_prompt(self, game_state):
 
@@ -68,7 +69,7 @@ Do not include anything outside of the json object. The response should be only 
         print(f"Cleaned Response: [{cleaned_response}]")
         action_params = json.loads(llm_decision)  # todo: add retry logic in case the response doesn't fit downstream reads
         print(action_params)
-        return json.loads(cleaned_response)
+        return action_params
 
     def play(self, table, player_status, is_called=False):
         print(f"{self.name} is figuring out their next play...")
@@ -82,24 +83,14 @@ Do not include anything outside of the json object. The response should be only 
             "max_bet": self.max_bet,
         }
 
-        # print()
-        # pprint.pprint(game_state)
-        # print()
+        try:
+            action_params = self.decide(game_state)
+        except:
+            # todo: blind retry...need to be better
+            action_params = self.decide(game_state)
 
-        # prompt = self.render_prompt(str(game_state))
-        # print("Prompt:")
-        # print(prompt)
-        #
-        # llm_decision = self.llm(prompt)
-        #
-        # print("LLM Decision")
-        # print(llm_decision)
-        #
-        # action_params = json.loads(llm_decision)
-
-        action_params = self.decide(game_state)
-
-        print(action_params)
+        if self.verbose:
+            print(action_params)
 
         if 'Action' in action_params.keys() and not action_params['Action'] == "FOLD":
             action_params['Amount'] = max(int(int(action_params['Amount']) if 'Amount' in action_params else 0), table.bet_amount)

@@ -22,14 +22,14 @@ class Claude(Player):
         prompt = "Below is a description of the current state of a Texas Holdem game.\n"
         prompt += str(game_state) + "\n"
         prompt += """
-This is a simulation and is not being played for real money. Assume the role of the player Chad. 
+This is a simulation and is not being played for real money. Assume the role of the player Claude. 
 
 Claude is a tough opponent. Claude plays a calculated game always thinking about next moves. 
 Claude watches other players to consider their strategy in his.
 Claude is also strategic. Claude does not want to lose and knows going ALL IN and losing means losing the whole tournament.
 Claude will go all in, but only when he's really confident, or really desperate.
 
-What is Chad's next move? Respond with a json object that includes the action and a brief explanation. 
+What is Claude's next move? Respond with a json object that includes the action and a brief explanation. 
 
 The response should be in the form:
 
@@ -87,7 +87,11 @@ Do not include anything outside of the json object. The response should be only 
         # action_params = json.loads(llm_decision) # todo: add retry logic in case the response doesn't fit downstream reads
         # print(action_params)
 
-        action_params = self.decide(game_state)
+        try:
+            action_params = self.decide(game_state)
+        except:
+            # todo: do better than a blind retry
+            action_params = self.decide(game_state)
 
         if 'Action' in action_params.keys() and not action_params['Action'] == "FOLD":
             action_params['Amount'] = max(int(int(action_params['Amount']) if 'Amount' in action_params else 0), table.bet_amount)

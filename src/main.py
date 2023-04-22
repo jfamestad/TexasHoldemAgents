@@ -37,16 +37,19 @@ players = [
 
 if __name__ == '__main__':
     winners = []
-    for i in range(1):
-        print(f"Starting round {i}")
-        new_players = [copy.deepcopy(player) for player in players]
-        tournament = Tournament(
-            players=new_players,
-            tournament_id=i
-        )
-        tournament.play()
-        logging.info(tournament.winners)
-        winners.append(tournament.winners)
+    for i in range(10):
+        try:
+            print(f"Starting round {i}")
+            new_players = [copy.deepcopy(player) for player in players]
+            tournament = Tournament(
+                players=new_players,
+                tournament_id=i
+            )
+            tournament.play()
+            logging.info(tournament.winners)
+            winners.append(tournament.winners)
+        except:
+            print("Too many bad responses...")
 
     logging.info("Results")
     for result in winners:
