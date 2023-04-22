@@ -4,7 +4,7 @@ from model.action import Action, FOLD, CALL, RAISE, CHECK, MATCH, action_types
 
 
 class BettingRound:
-    def __init__(self, table, players):
+    def __init__(self, table, players, round_number=None):
         self.is_called = False
         self.betting_round_complete = False
         self.calling_player_name = None
@@ -14,24 +14,7 @@ class BettingRound:
         self.reset_players()
         self.all_in_players = []
         self._last_total_money = None
-
-    # def check_money_supply(self):
-    #     # total money = pot_total + sum of all player bankrolls
-    #     print(f"Checking money supply for change. Last value: {self._last_total_money}")
-    #     player_bankrolls_total = sum([player.bankroll for player in self.players])
-    #     total = self.table.pot_total + player_bankrolls_total
-    #     print(f"Current Total: {total}")
-    #     # if (not total is None) and (total > 1100):
-    #     #     raise Exception("New Money detected in game")
-    #     if self._last_total_money is None:
-    #         print(f"First check of money supply. Nonevalue ok {self._last_total_money}")
-    #         self._last_total_money = total
-    #     else:
-    #         if not self._last_total_money == total:
-    #             print(f"New money detected. Change in total money in game: {self._last_total_money}")
-    #             raise
-    #     self._last_total_money = total
-    #     return self._last_total_money
+        self.round_number = round_number
 
     def reset_active_player_index(self):
         self.table.new_betting_round()
@@ -86,12 +69,21 @@ class BettingRound:
                 player_status = {player.name: player.folded for player in self.players}
                 logging.debug(f"The bet is {self.table.bet_amount} to {active_player.name}")
 
-                action = active_player.play(self.table, player_status)
-                print(f"{active_player.name}: {action}")
-                logging.debug(f"Got action: {action}")
 
-                # handle the players action
-                self.handle_action(action, active_player)
+                retry_count = 0
+                while retry_count < 3:
+                    try:
+                        action = active_player.play(self.table, player_status, round_number=self.round_number)
+                        print(f"{active_player.name}: {action}")
+                        logging.debug(f"Got action: {action}")
+
+                        # handle the players action
+                        self.handle_action(action, active_player)
+                        break
+                    except:
+                        print(f"WARNING: Got invalid action. Retry count {retry_count}")
+                    finally:
+                        retry_count += 1
 
             self.table.next_turn()
 

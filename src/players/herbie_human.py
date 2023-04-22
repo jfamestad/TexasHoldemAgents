@@ -50,7 +50,7 @@ class Herbie(Player):
 
         return action
 
-    def play(self, table, player_status, is_called=False):
+    def play(self, table, player_status, is_called=False, round_number=None):
 
         pprint(player_status)
         print(self._hole)

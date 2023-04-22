@@ -145,7 +145,7 @@ class Player:
         self._hole.append(card)
         assert len(self._hole) <= 2
 
-    def play(self, table, player_status, is_called=False):
+    def play(self, table, player_status, is_called=False, round_number=None):
         pass # Players implement this function to define the Actions they play
 
     def check_results(self, table, results):

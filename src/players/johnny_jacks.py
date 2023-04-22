@@ -24,7 +24,7 @@ class Johnny(Player):
         else:
             return self.call(table)
 
-    def play(self, table, player_status, is_called=False):
+    def play(self, table, player_status, is_called=False, round_number=None):
         logging.debug(f"{self.name} sees the bet is at: {table.bet_amount}")
         # print(f"{self.name} has {self._hole} in the hole")
         # print(f"{self.name} has {self.bankroll} in the bankroll")

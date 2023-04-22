@@ -7,7 +7,7 @@ from model.action import Action
 class Stuart(Player):
     persona = "Stuart Stats"
 
-    def play(self, table, player_status, is_called=False):
+    def play(self, table, player_status, is_called=False, round_number=None):
 
         print(f"Table: {table}")
         print(f"Player status: {player_status}")

@@ -10,6 +10,9 @@ from Anthropic and OpenAI. If you use an LLM model, you need to
 configure your API access keys as an environment error. If you
 miss the API keys, you should see a helpful message.
 
+When you run a tournament, results of each hand are saved to a csv 
+file in the results folder for later analysis. 
+
 ### Running it
 
 There's not much for an interface yet. You can define a tournament

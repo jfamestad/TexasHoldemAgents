@@ -8,7 +8,7 @@ from model.action import Action
 class Robby(Player):
     persona = "Robbie Random"
 
-    def play(self, table, player_status, is_called=False):
+    def play(self, table, player_status, is_called=False, round_number=None):
         random_value = random.random()
         if is_called:
             if self.max_bet > table.bet_amount:

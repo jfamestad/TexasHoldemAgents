@@ -45,6 +45,7 @@ class Tournament:
         holdem_round = HoldemRound(
             players=players,
             table=self.table,
+            round_number=round_number,
         )
         self.players, self.table = holdem_round.play()
         results = holdem_round.results

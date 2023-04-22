@@ -11,7 +11,7 @@ class HoldemRound:
     # HoldemRound orchestrates the game play including player and deck management
     # it passes th Table object around as a shared state the public game knowledge
 
-    def __init__(self, players, blind=1, table=None, raise_blinds=False):
+    def __init__(self, players, blind=1, table=None, raise_blinds=False, round_number=None):
         self.players = players  # the list of players was passed in
         if table:
             self.table = table
@@ -25,6 +25,7 @@ class HoldemRound:
             self.table = Table(blind, len(players))
             if raise_blinds:
                 raise Exception("Cannot raise blinds on new table. raise_blinds requires a table parameter.")
+        self.round_number = round_number
         self.deck = None
         self.results = None
         self.betting_round_complete = False
@@ -76,7 +77,7 @@ class HoldemRound:
     def do_betting_round(self):
         logging.debug("Starting betting round")
         print(f"Do the preround money check")
-        betting_round = BettingRound(self.table, self.players)
+        betting_round = BettingRound(self.table, self.players, self.round_number)
         # betting_round.check_money_supply()
         self.players, self.table = betting_round.do_round()
         print("Checking post round money supply")
@@ -152,7 +153,7 @@ class HoldemRound:
             print(f"First check of money supply. Nonevalue ok {self._last_total_money}")
             self._last_total_money = total
         else:
-            if not self._last_total_money == total:
+            if not self._last_total_money >= total: # sometimes we tip the dealer splitting pots, should never increase
                 print(f"New money detected. Change in total money in game: {self._last_total_money}")
                 raise Exception("New Money detected in game")
         self._last_total_money = total

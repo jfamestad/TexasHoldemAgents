@@ -11,7 +11,7 @@ class Callie(Player):
         self.raise_count = 0
         self.raise_limit = raise_limit
 
-    def play(self, table, player_status, is_called=False):
+    def play(self, table, player_status, is_called=False, round_number=None):
         logging.debug(f"{self.name} sees the bet is at: {table.bet_amount}")
         if self.max_bet > table.bet_amount:
             action = Action("CALL", table.bet_amount)

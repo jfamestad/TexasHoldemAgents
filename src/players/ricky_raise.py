@@ -17,7 +17,7 @@ class Ricky(Player):
         super().start_betting_round()
         self.raise_count = 0
 
-    def play(self, table, player_status, is_called=False):
+    def play(self, table, player_status, is_called=False, round_number=None):
         if is_called:
             # print("Ricky will Match")
             action = Action("MATCH", min(table.bet_amount, self.max_bet))

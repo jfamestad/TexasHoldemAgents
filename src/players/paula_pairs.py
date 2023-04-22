@@ -4,7 +4,7 @@ from model.action import Action
 class Paula(Player):
     persona = "Paula Pairs"
 
-    def play(self, table, player_status, is_called=False):
+    def play(self, table, player_status, is_called=False, round_number=None):
         # Check if player has a pair
         hand = self._hole
         if hand[0] == hand[1]:
