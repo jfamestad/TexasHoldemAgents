@@ -42,6 +42,7 @@ class Tournament:
 
     def do_round(self, round_number):
         players = self.players_still_in(self.table.big_blind)
+        initial_players = players.copy()
         holdem_round = HoldemRound(
             players=players,
             table=self.table,
@@ -53,6 +54,8 @@ class Tournament:
         results["tournament_id"] = self.tournament_id
         results["tournament_uuid"] = self._uuid
         results["player_count"] = self.count_still_in
+        results["players_in_round"] = [ player.name for player in initial_players ]
+        results["players_eliminated"] = [ player.name for player in initial_players if not player in self.players_still_in(self.table.big_blind) ]
         self.round_results.append(results)
 
     def write_tournament_results(self):

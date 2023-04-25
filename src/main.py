@@ -17,7 +17,7 @@ from model.tournament import Tournament
 players = [
     Ricky("Alice", 100),
     Robby("Cody", 100),
-    Chad("Chad", 100, temperature=.75),
+    # Chad("Chad", 100, temperature=.3),
     Claude("Claude", 100),
     Callie("Baxter", 100),
     # Ricky("Julio", 100),
@@ -37,7 +37,7 @@ players = [
 
 if __name__ == '__main__':
     winners = []
-    for i in range(20):
+    for i in range(100):
         # try:
             print(f"Starting round {i}")
             new_players = [copy.deepcopy(player) for player in players]

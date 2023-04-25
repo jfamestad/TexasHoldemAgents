@@ -152,7 +152,7 @@ class Player:
         pass # Players can implement this function to inspect the end state of each round.
 
     def _all_five_card_hands(self, cards):
-        all_cards = self._hole
+        all_cards = self._hole.copy()
         all_cards.extend(cards)
         logging.debug(f"{self.name} makes a hand from: {all_cards}")
         card_combinations = combinations(all_cards, 5)

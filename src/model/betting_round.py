@@ -80,8 +80,9 @@ class BettingRound:
                         # handle the players action
                         self.handle_action(action, active_player)
                         break
-                    except:
+                    except ValueError as e:
                         print(f"WARNING: Got invalid action. Retry count {retry_count}")
+                        print(f"Exception: {e}")
                     finally:
                         retry_count += 1
 
