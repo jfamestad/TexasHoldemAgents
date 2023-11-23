@@ -1,0 +1,11 @@
+{
+  "Action": "CALL",
+  "Amount": 2,
+  "Explanation": "Claude has an unpaired King high card, which is moderately strong. With no money committed yet and the option to fold after the flop, Claude decides to call the small opening bet to see the flop cards. He explains that with only one opponent betting so far, he has good pot odds to continue and try to make a big hand like a flush or straight. However, Claude is positioned to fold if he doesn't improve after the flop without investing much."
+}
+
+{
+  "Action": "CALL",
+  "Amount": 68,
+  "Explanation": "With an unmatched King and a 6 in the hole, Claude does not have a strong starting hand. However, the King is a high card that could make a decent hand if the community cards come out favorably. Since Claude already has $2 committed to the pot, and the current bet is $68, he decides to call and see the flop, rather than fold and waste the $2. Calling keeps him in the hand in case he improves. An early fold would be overly cautious. But without at least a pair in the hole, Claude will not raise with only one high card. He explains his patient, calculated strategy, considering both the cards and the betting patterns of the other players."
+}

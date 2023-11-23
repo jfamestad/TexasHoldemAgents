@@ -2,8 +2,9 @@ import pprint
 import json
 
 import sys
-from langchain.llms import Anthropic
+from langchain.chat_models import ChatAnthropic
 # from langchain import PromptTemplate, LLMChain
+from langchain.schema import HumanMessage
 
 from model.player import Player
 from model.action import Action
@@ -15,7 +16,11 @@ class Claude(Player):
         super().__init__(name, bankroll)
         self.raise_count = 0
         self.raise_limit = raise_limit
-        self.llm = llm = Anthropic() # todo: we arent passing temperature yet...
+        # self.llm = Anthropic() # todo: we arent passing temperature yet...
+
+    @property
+    def llm(self):
+        return ChatAnthropic()
 
     def render_prompt(self, game_state):
 
@@ -67,13 +72,10 @@ If Claude has a FLUSH or Better, he will bet big before the showdown, working hi
 
 What is Claude's next move? Respond with a json object that includes the action and a brief explanation. 
 
-The response should be proper json in the form:
-
-{
-    "Action": action,
-    "Amount": amount,
-    "Explanation": detailed_explanation
-}
+The entire response should be a json representation of a dictionary object. 
+The keys in this dictionary object are: "Action", "Amount", and "Explanation"
+Do not add to your bet if you will fold. 
+The amount shouldn't be more than the money you already have on the table unless you want to raise.
 
 Valid actions are CALL RAISE FOLD and they are case sensitive (must be all caps!!)
 Valid values for amount are integers greater than or equal to the table current_bet and less than or equal to the players max_bet.
@@ -148,7 +150,9 @@ Do not include anything outside of the json object. The response should be only 
         else:
             prompt += "After this betting round, everyone will show cards and we will settle the round.\n"
 
-        return prompt
+
+        # print(prompt)
+        return HumanMessage(content=prompt)
 
     def decide(self, game_state):
         prompt = self.render_prompt(game_state)
@@ -164,14 +168,15 @@ Do not include anything outside of the json object. The response should be only 
         print(f"Current Bet: {game_state['current_bet']}")
         print(f"Your maximum bet is {self.max_bet} and you already have {self.status.money_on_table} of that on the table.\n")
 
-        llm_decision = self.llm(prompt)
+        llm_decision = self.llm([prompt]).content
 
         print("LLM Decision")
-        print(llm_decision)
+        # print(llm_decision)
         cleaned_response = "{" + llm_decision.split("{")[1].split('}')[0] + "}"
-        print(f"Cleaned Response: [{cleaned_response}]")
+        print(f"Cleaned Response: {cleaned_response}")
         action_params = json.loads(llm_decision)
         print(action_params)
+        return json.loads(cleaned_response)
         return json.loads(cleaned_response)
 
     def play(self, table, player_status, is_called=False, round_number=None):

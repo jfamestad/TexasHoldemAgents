@@ -42,6 +42,7 @@ class Tournament:
 
     def do_round(self, round_number):
         players = self.players_still_in(self.table.big_blind)
+        print("starting round")
         initial_players = players.copy()
         holdem_round = HoldemRound(
             players=players,
