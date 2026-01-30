@@ -118,24 +118,72 @@ class HoldemRound:
         }
 
     def settle_round(self):
-        # print("Checking before betting players settle up")
-        # self.check_total_money()
-        for i in range(len(self.players)):
-            name = self.players[i].name
-            if name in self.winners:
-                # print(f"Checking before {name} settles up")
-                # self.check_total_money()
-                # todo: sum up amounts from the pot
-                players_share_of_pot = math.floor(self.table.pot_total / len(self.winners)) # tip the dealer!
-                print(f"{name} collects {players_share_of_pot} from the pot. total pot size {self.table.pot_total}")
-                self.players[i].collect_winnings(players_share_of_pot)
-                # print(f"Checking after {name} settles up")
-                # self.check_total_money()
-            # print(f"Checking after players all settle up")
-            # self.check_total_money()
-            self.players[i].check_results(self.table, self.results)
-            # print("Checking after letting players check results")
-            # self.check_total_money()
+        """
+        Settle the round with proper side pot handling.
+
+        When players are all-in for different amounts, we need to split the pot:
+        - Each player can only win from others up to the amount they put in
+        - Excess bets that can't be matched go back to the bettor or into side pots
+        """
+        # Get each player's contribution and hand
+        player_contributions = {}
+        player_hands = {}
+        for player in self.players:
+            contribution = player.status.money_on_table if hasattr(player, 'status') and player.status else 0
+            player_contributions[player.name] = contribution
+            if not player.folded:
+                player_hands[player.name] = player.best_hand(self.table)
+
+        # Get unique contribution levels, sorted ascending
+        contribution_levels = sorted(set(player_contributions.values()))
+
+        # Track winnings for each player
+        player_winnings = {player.name: 0 for player in self.players}
+
+        # Process each pot level
+        prev_level = 0
+        for level in contribution_levels:
+            if level == 0:
+                continue
+
+            # Calculate pot at this level
+            # Each player who contributed >= this level adds (level - prev_level)
+            pot_at_level = 0
+            eligible_players = []
+
+            for player in self.players:
+                player_contrib = player_contributions[player.name]
+                if player_contrib >= level:
+                    # This player contributed to this pot level
+                    pot_at_level += (level - prev_level)
+
+                    # They're eligible to win if they haven't folded
+                    if not player.folded:
+                        eligible_players.append(player.name)
+
+            if pot_at_level > 0 and eligible_players:
+                # Find the best hand among eligible players
+                eligible_hands = {name: player_hands[name] for name in eligible_players}
+                best_hand = max(eligible_hands.values())
+                winners_at_level = [name for name, hand in eligible_hands.items() if hand == best_hand]
+
+                # Award pot to winner(s) at this level
+                share = math.floor(pot_at_level / len(winners_at_level))
+                for winner in winners_at_level:
+                    player_winnings[winner] += share
+                    logging.debug(f"{winner} wins ${share} from pot level ${level}")
+
+            prev_level = level
+
+        # Distribute winnings
+        for player in self.players:
+            name = player.name
+            winnings = player_winnings[name]
+            if winnings > 0:
+                print(f"{name} collects {winnings} from the pot. total pot size {self.table.pot_total}")
+                player.collect_winnings(winnings)
+            player.check_results(self.table, self.results)
+
         self.table.payout()
 
     def collect_blinds(self):
