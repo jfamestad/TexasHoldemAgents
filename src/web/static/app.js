@@ -208,8 +208,9 @@ function renderGameState(state) {
         actionArea.classList.add('hidden');
     }
 
-    // Render history
+    // Render history and chat
     renderHistory(state.history || []);
+    renderChat(state.history || []);
 
     lastHistoryLength = (state.history || []).length;
 }
@@ -298,6 +299,24 @@ function renderHistory(history) {
             text += ' (All In!)';
         }
         return `<div class="history-item">${text}</div>`;
+    }).join('');
+
+    // Scroll to bottom
+    container.scrollTop = container.scrollHeight;
+}
+
+function renderChat(history) {
+    const container = document.getElementById('chat-list');
+
+    // Filter to only actions with messages
+    const messagesOnly = history.filter(action => action.message);
+    const recent = messagesOnly.slice(-15);
+
+    container.innerHTML = recent.map(action => {
+        return `<div class="chat-message">
+            <span class="chat-player">${action.player}:</span>
+            <span class="chat-text">${action.message}</span>
+        </div>`;
     }).join('');
 
     // Scroll to bottom

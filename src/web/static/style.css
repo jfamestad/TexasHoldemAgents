@@ -177,8 +177,16 @@ body {
 /* Game Screen */
 #game {
     display: grid;
-    grid-template-columns: 1fr 250px;
+    grid-template-columns: 1fr 280px;
     gap: 20px;
+}
+
+/* Side Panels Container */
+.side-panels {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: calc(100vh - 60px);
 }
 
 .poker-table {
@@ -378,19 +386,65 @@ body {
     font-size: 14px;
 }
 
+/* Chat Panel */
+.chat-panel {
+    background: #2a2a4a;
+    border-radius: 12px;
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+}
+
+.chat-panel h3 {
+    margin-bottom: 12px;
+    color: #aaa;
+    font-size: 14px;
+}
+
+.chat-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.chat-message {
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    background: #1a1a2e;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.chat-player {
+    font-weight: bold;
+    color: #667eea;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 11px;
+}
+
+.chat-text {
+    color: #ddd;
+    font-style: italic;
+}
+
 /* History Panel */
 .history-panel {
     background: #2a2a4a;
     border-radius: 12px;
-    padding: 20px;
-    max-height: 600px;
+    padding: 15px;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    min-height: 150px;
 }
 
 .history-panel h3 {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: #aaa;
+    font-size: 14px;
 }
 
 .history-list {
@@ -399,9 +453,9 @@ body {
 }
 
 .history-item {
-    padding: 8px 0;
+    padding: 6px 0;
     border-bottom: 1px solid #3a3a5a;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .history-item:last-child {
@@ -457,8 +511,15 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .side-panels {
+        flex-direction: row;
+        max-height: none;
+    }
+
+    .chat-panel,
     .history-panel {
-        max-height: 200px;
+        max-height: 180px;
+        min-height: 150px;
     }
 
     .poker-table {

@@ -172,33 +172,28 @@ def run_game_loop():
             )
 
             # Monkey-patch the betting round to capture actions
-            original_handle_action = current_game.do_betting_round
+            # Must patch in holdem_round's namespace since it imports BettingRound directly
+            import model.holdem_round
+            from model.betting_round import BettingRound as OriginalBettingRound
 
-            def patched_betting_round():
-                """Wrapper to capture actions during betting."""
-                from model.betting_round import BettingRound
+            class TrackedBettingRound(OriginalBettingRound):
+                def handle_action(self, action, active_player):
+                    # Record action in history with chat message if available
+                    message = getattr(active_player, 'last_message', None)
+                    action_history.append({
+                        "player": active_player.name,
+                        "action": action.action_type,
+                        "amount": action.amount,
+                        "all_in": action.all_in,
+                        "message": message
+                    })
+                    # Clear the message after capturing it
+                    if hasattr(active_player, 'last_message'):
+                        active_player.last_message = None
+                    return super().handle_action(action, active_player)
 
-                # Get the original class
-                OriginalBettingRound = BettingRound
-
-                class TrackedBettingRound(OriginalBettingRound):
-                    def handle_action(self, action, active_player):
-                        # Record action in history
-                        action_history.append({
-                            "player": active_player.name,
-                            "action": action.action_type,
-                            "amount": action.amount,
-                            "all_in": action.all_in
-                        })
-                        return super().handle_action(action, active_player)
-
-                # Temporarily replace
-                import model.betting_round
-                model.betting_round.BettingRound = TrackedBettingRound
-                try:
-                    original_handle_action()
-                finally:
-                    model.betting_round.BettingRound = OriginalBettingRound
+            # Apply the patch to holdem_round's namespace
+            model.holdem_round.BettingRound = TrackedBettingRound
 
             # Run the round
             try:

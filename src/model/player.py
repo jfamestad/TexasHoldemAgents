@@ -26,6 +26,7 @@ class Player:
         self._hole = []
         self._best_hand = None
         self._games_played = 0
+        self.last_message = None  # Chat message from last action
         # self._folded = False
 
     def __str__(self):

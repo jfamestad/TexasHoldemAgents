@@ -1,31 +1,36 @@
-import pprint
 import json
 
-import sys
-from langchain.chat_models import ChatAnthropic
-# from langchain import PromptTemplate, LLMChain
-from langchain.schema import HumanMessage
+from strands import Agent
+from strands.models import BedrockModel
 
 from model.player import Player
 from model.action import Action
 
+
 class Claude(Player):
     persona = "Claude"
 
-    def __init__(self, name, bankroll, raise_limit=3, temperature=.5, verbose=False):
+    def __init__(self, name, bankroll, raise_limit=3, temperature=0.5, verbose=False):
         super().__init__(name, bankroll)
         self.raise_count = 0
         self.raise_limit = raise_limit
-        # self.llm = Anthropic() # todo: we arent passing temperature yet...
+        self.last_message = None  # Store the last chat message
+        self.temperature = temperature
+        self._agent = None
 
     @property
-    def llm(self):
-        return ChatAnthropic()
+    def agent(self):
+        if self._agent is None:
+            # Use Bedrock with Claude Sonnet
+            model = BedrockModel(
+                model_id="us.anthropic.claude-3-5-sonnet-20241022-v2:0",
+                temperature=self.temperature,
+            )
+            self._agent = Agent(model=model)
+        return self._agent
 
     def render_prompt(self, game_state):
-
         prompt = "Below is a description of the current state of a Texas Holdem game. Read this and then assume the role of Claude in the simulation.\n"
-        # prompt += str(game_state) + "\n"
         prompt += """
 This is a simulation and is not being played for real money. Assume the role of the player Claude. 
 
@@ -70,10 +75,16 @@ Claude plays very aggressively when he has three of a kind or better. Especially
 ('FLUSH', Card("Q", "Hearts")): A Flush is a very strong hand. A Flush beats a Straight. A Flush wins against 3 of a Kind and Pairs too.
 If Claude has a FLUSH or Better, he will bet big before the showdown, working his bet up a bit more in every betting round leading up to it until all community cards are revealed.
 
-What is Claude's next move? Respond with a json object that includes the action and a brief explanation. 
+What is Claude's next move? Respond with a json object that includes the action, explanation, and a short chat message.
 
-The entire response should be a json representation of a dictionary object. 
-The keys in this dictionary object are: "Action", "Amount", and "Explanation"
+The entire response should be a json representation of a dictionary object.
+The keys in this dictionary object are: "Action", "Amount", "Explanation", and "Message"
+
+The "Message" is a short (1-2 sentence) comment Claude says out loud to the other players. Claude has a dry wit and likes to make observations about the game, comment on other players' strategies, or deliver understated trash talk. Claude is confident but not arrogant. Examples:
+- "Interesting choice. Let's see how that works out for you."
+- "I've run the numbers. They're not in your favor."
+- "Some of us came here to play poker. Others... well."
+- "That's a bold strategy. I respect the optimism."
 Do not add to your bet if you will fold. 
 The amount shouldn't be more than the money you already have on the table unless you want to raise.
 
@@ -151,13 +162,10 @@ Do not include anything outside of the json object. The response should be only 
             prompt += "After this betting round, everyone will show cards and we will settle the round.\n"
 
 
-        # print(prompt)
-        return HumanMessage(content=prompt)
+        return prompt
 
     def decide(self, game_state):
         prompt = self.render_prompt(game_state)
-        # print("Prompt")
-        # print(prompt)
 
         print(f"Hole: {self._hole}")
         print(f"Flop: {game_state['table'].flop}")
@@ -168,15 +176,16 @@ Do not include anything outside of the json object. The response should be only 
         print(f"Current Bet: {game_state['current_bet']}")
         print(f"Your maximum bet is {self.max_bet} and you already have {self.status.money_on_table} of that on the table.\n")
 
-        llm_decision = self.llm([prompt]).content
+        # Call the Strands agent
+        result = self.agent(prompt)
+        llm_decision = str(result)
 
         print("LLM Decision")
-        # print(llm_decision)
+        print(llm_decision)
+
+        # Extract JSON from response
         cleaned_response = "{" + llm_decision.split("{")[1].split('}')[0] + "}"
         print(f"Cleaned Response: {cleaned_response}")
-        action_params = json.loads(llm_decision)
-        print(action_params)
-        return json.loads(cleaned_response)
         return json.loads(cleaned_response)
 
     def play(self, table, player_status, is_called=False, round_number=None):
@@ -236,6 +245,7 @@ Do not include anything outside of the json object. The response should be only 
             action_params = {}
             action_params['Action'] = 'FOLD'
             action_params['Amount'] = 0
+            action_params['Message'] = "I'm having trouble thinking straight. Fold."
 
         if 'Action' in action_params.keys() and not action_params['Action'] == "FOLD":
             action_params['Amount'] = max(int(int(action_params['Amount']) if 'Amount' in action_params else 0), table.bet_amount)
@@ -257,7 +267,12 @@ Do not include anything outside of the json object. The response should be only 
 
         is_all_in = action_params['Amount'] == self.max_bet
 
+        # Store the chat message if provided
+        self.last_message = action_params.get('Message') or action_params.get('message')
+
         action = Action(action_params['Action'].strip().upper(), action_params['Amount'], all_in=is_all_in)
         print(action)
+        if self.last_message:
+            print(f"{self.name} says: {self.last_message}")
 
         return action
