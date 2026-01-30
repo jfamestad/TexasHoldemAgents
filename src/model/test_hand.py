@@ -116,3 +116,131 @@ def test_royal_v_two_pair():
 
 def test_full_v_two_pair():
     assert hand_2 > hand_4
+
+
+# Tests for rank comparison bug fix
+# The bug was comparing rank strings alphabetically ("A" < "K") instead of
+# using numeric rank values (Ace=14 > King=13)
+
+def test_pair_aces_beats_pair_kings():
+    """Pair of Aces should beat Pair of Kings (not alphabetical order)."""
+    # Pair of Aces: A-A-K-Q-9
+    pair_aces = Hand([
+        Card("A", "Spades"),
+        Card("A", "Hearts"),
+        Card("K", "Hearts"),
+        Card("Q", "Clubs"),
+        Card("9", "Clubs")
+    ])
+    # Pair of Kings: K-K-A-Q-9
+    pair_kings = Hand([
+        Card("K", "Clubs"),
+        Card("K", "Hearts"),
+        Card("A", "Hearts"),
+        Card("Q", "Clubs"),
+        Card("9", "Clubs")
+    ])
+    assert pair_aces > pair_kings
+    assert not pair_kings > pair_aces
+
+
+def test_three_of_a_kind_aces_beats_kings():
+    """Three Aces should beat Three Kings."""
+    three_aces = Hand([
+        Card("A", "Spades"),
+        Card("A", "Hearts"),
+        Card("A", "Clubs"),
+        Card("K", "Hearts"),
+        Card("Q", "Clubs")
+    ])
+    three_kings = Hand([
+        Card("K", "Spades"),
+        Card("K", "Hearts"),
+        Card("K", "Clubs"),
+        Card("A", "Hearts"),
+        Card("Q", "Clubs")
+    ])
+    assert three_aces > three_kings
+    assert not three_kings > three_aces
+
+
+def test_four_of_a_kind_aces_beats_kings():
+    """Four Aces should beat Four Kings."""
+    four_aces = Hand([
+        Card("A", "Spades"),
+        Card("A", "Hearts"),
+        Card("A", "Clubs"),
+        Card("A", "Diamonds"),
+        Card("2", "Clubs")
+    ])
+    four_kings = Hand([
+        Card("K", "Spades"),
+        Card("K", "Hearts"),
+        Card("K", "Clubs"),
+        Card("K", "Diamonds"),
+        Card("A", "Clubs")
+    ])
+    assert four_aces > four_kings
+    assert not four_kings > four_aces
+
+
+def test_two_pair_aces_and_twos_beats_kings_and_queens():
+    """Two pair A-A-2-2 should beat K-K-Q-Q."""
+    two_pair_aces = Hand([
+        Card("A", "Spades"),
+        Card("A", "Hearts"),
+        Card("2", "Clubs"),
+        Card("2", "Diamonds"),
+        Card("3", "Hearts")
+    ])
+    two_pair_kings = Hand([
+        Card("K", "Spades"),
+        Card("K", "Hearts"),
+        Card("Q", "Clubs"),
+        Card("Q", "Diamonds"),
+        Card("A", "Hearts")
+    ])
+    assert two_pair_aces > two_pair_kings
+    assert not two_pair_kings > two_pair_aces
+
+
+def test_full_house_aces_over_twos_beats_kings_over_queens():
+    """Full house A-A-A-2-2 should beat K-K-K-Q-Q."""
+    full_house_aces = Hand([
+        Card("A", "Spades"),
+        Card("A", "Hearts"),
+        Card("A", "Clubs"),
+        Card("2", "Diamonds"),
+        Card("2", "Hearts")
+    ])
+    full_house_kings = Hand([
+        Card("K", "Spades"),
+        Card("K", "Hearts"),
+        Card("K", "Clubs"),
+        Card("Q", "Diamonds"),
+        Card("Q", "Hearts")
+    ])
+    assert full_house_aces > full_house_kings
+    assert not full_house_kings > full_house_aces
+
+
+def test_pair_same_rank_higher_kicker_wins():
+    """When pairs are equal, higher kicker should win."""
+    # Pair of Kings with Ace kicker
+    pair_kings_ace_kicker = Hand([
+        Card("K", "Spades"),
+        Card("K", "Hearts"),
+        Card("A", "Clubs"),
+        Card("5", "Diamonds"),
+        Card("3", "Hearts")
+    ])
+    # Pair of Kings with Queen kicker
+    pair_kings_queen_kicker = Hand([
+        Card("K", "Clubs"),
+        Card("K", "Diamonds"),
+        Card("Q", "Spades"),
+        Card("5", "Hearts"),
+        Card("3", "Clubs")
+    ])
+    assert pair_kings_ace_kicker > pair_kings_queen_kicker
+    assert not pair_kings_queen_kicker > pair_kings_ace_kicker

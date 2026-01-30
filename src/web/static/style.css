@@ -1,0 +1,575 @@
+/* Poker Web UI Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a2e;
+    color: #fff;
+    min-height: 100vh;
+}
+
+#app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.screen {
+    min-height: calc(100vh - 40px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-fold {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-call {
+    background: #2ecc71;
+    color: white;
+}
+
+.btn-raise {
+    background: #f39c12;
+    color: white;
+}
+
+/* Lobby Screen */
+#lobby {
+    text-align: center;
+    padding-top: 40px;
+}
+
+#lobby h1 {
+    font-size: 48px;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.lobby-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.lobby-content h2 {
+    margin-bottom: 20px;
+    color: #aaa;
+}
+
+.opponent-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.opponent-option {
+    background: #2a2a4a;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.opponent-option:hover {
+    background: #3a3a5a;
+    border-color: #667eea;
+}
+
+.opponent-option.selected {
+    background: #3a3a5a;
+    border-color: #764ba2;
+}
+
+.opponent-option strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.opponent-option .description {
+    font-size: 12px;
+    color: #888;
+}
+
+.selected-opponents {
+    margin-bottom: 20px;
+}
+
+.selected-opponents h3 {
+    margin-bottom: 10px;
+    color: #aaa;
+}
+
+#selected-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.selected-chip {
+    background: #764ba2;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.game-options {
+    margin-bottom: 30px;
+}
+
+.game-options label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.game-options input {
+    background: #2a2a4a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: white;
+    width: 100px;
+    text-align: center;
+}
+
+/* Game Screen */
+#game {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    gap: 20px;
+}
+
+.poker-table {
+    background: linear-gradient(135deg, #1a472a 0%, #2d5a3f 100%);
+    border-radius: 200px / 100px;
+    padding: 40px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 12px solid #5d4e37;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+/* Community Area */
+.community-area {
+    text-align: center;
+}
+
+.pot-display {
+    background: rgba(0,0,0,0.5);
+    padding: 8px 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.cards-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Cards */
+.card {
+    width: 70px;
+    height: 100px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.card-placeholder {
+    background: linear-gradient(135deg, #3a5a3a 0%, #2a4a2a 100%);
+    border: 2px dashed #5a7a5a;
+}
+
+.card-red {
+    color: #e74c3c;
+}
+
+.card-black {
+    color: #2c3e50;
+}
+
+.card-rank {
+    font-size: 20px;
+}
+
+.card-suit {
+    font-size: 28px;
+}
+
+/* Players Area */
+.players-area {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.player-seat {
+    background: rgba(0,0,0,0.6);
+    border-radius: 12px;
+    padding: 12px 20px;
+    text-align: center;
+    min-width: 120px;
+}
+
+.player-seat.folded {
+    opacity: 0.5;
+}
+
+.player-name {
+    font-weight: bold;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.dealer-chip {
+    background: #f39c12;
+    color: black;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-bankroll {
+    color: #2ecc71;
+    font-size: 14px;
+}
+
+.player-bet {
+    color: #f39c12;
+    font-size: 12px;
+}
+
+.player-status {
+    color: #e74c3c;
+    font-size: 12px;
+    font-style: italic;
+}
+
+/* Your Hand */
+.your-hand {
+    text-align: center;
+}
+
+.your-hand h3 {
+    margin-bottom: 10px;
+    color: rgba(255,255,255,0.7);
+}
+
+.your-info {
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    font-size: 14px;
+}
+
+/* Action Area */
+.action-area {
+    background: rgba(0,0,0,0.7);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.action-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.raise-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.raise-controls input {
+    width: 80px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #2a2a4a;
+    color: white;
+    text-align: center;
+}
+
+/* Game Status */
+.game-status {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* History Panel */
+.history-panel {
+    background: #2a2a4a;
+    border-radius: 12px;
+    padding: 20px;
+    max-height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.history-panel h3 {
+    margin-bottom: 15px;
+    color: #aaa;
+}
+
+.history-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.history-item {
+    padding: 8px 0;
+    border-bottom: 1px solid #3a3a5a;
+    font-size: 13px;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #2a2a4a;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 400px;
+}
+
+.modal-content-wide {
+    max-width: 700px;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    margin-bottom: 15px;
+}
+
+.modal-content ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.modal-content li {
+    padding: 8px 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    #game {
+        grid-template-columns: 1fr;
+    }
+
+    .history-panel {
+        max-height: 200px;
+    }
+
+    .poker-table {
+        border-radius: 20px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .card {
+        width: 50px;
+        height: 72px;
+        font-size: 16px;
+    }
+
+    .card-rank {
+        font-size: 14px;
+    }
+
+    .card-suit {
+        font-size: 20px;
+    }
+
+    .action-buttons {
+        flex-wrap: wrap;
+    }
+}
+
+/* Round Results Modal */
+.winner-announcement {
+    font-size: 24px;
+    color: #2ecc71;
+    margin-bottom: 10px;
+}
+
+.winning-hand {
+    font-size: 16px;
+    color: #f39c12;
+    margin-bottom: 20px;
+}
+
+.results-community {
+    margin-bottom: 20px;
+}
+
+.results-community h4 {
+    margin-bottom: 10px;
+    color: #aaa;
+}
+
+.results-hands h4 {
+    margin-bottom: 15px;
+    color: #aaa;
+}
+
+.player-hands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    text-align: center;
+}
+
+.player-hand-result {
+    background: #1a1a2e;
+    border-radius: 12px;
+    padding: 15px;
+    border: 2px solid transparent;
+}
+
+.player-hand-result.winner {
+    border-color: #2ecc71;
+    background: rgba(46, 204, 113, 0.1);
+}
+
+.player-hand-result.folded {
+    opacity: 0.6;
+}
+
+.player-hand-name {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.player-hand-result.winner .player-hand-name {
+    color: #2ecc71;
+}
+
+.player-hand-status {
+    color: #e74c3c;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.player-best-hand {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #f39c12;
+}
+
+/* Small cards for results modal */
+.card-small {
+    width: 45px;
+    height: 65px;
+    font-size: 14px;
+}
+
+.card-small .card-rank {
+    font-size: 14px;
+}
+
+.card-small .card-suit {
+    font-size: 18px;
+}

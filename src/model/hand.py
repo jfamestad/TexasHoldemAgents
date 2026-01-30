@@ -145,7 +145,7 @@ class Hand:
 
         if self_hand_rank == "FOUR_OF_A_KIND":
             if not self_description[1] == other_description[1]:
-                return self_description[1] < other_description[1]
+                return ranks[self_description[1]] < ranks[other_description[1]]
             self_fifth_card = [card for card in self._cards if not card.rank == self_description[1]][0]
             other_fifth_card = [card for card in other._cards if not card.rank == self_description[1]][0]
             return self_fifth_card < other_fifth_card
@@ -154,7 +154,7 @@ class Hand:
             if self_description[1] == other_description[1]:
                 # print("same triple, comparing double: {} < {} ? {}".format( self_description[2], other_description[2], self_description[2] < other_description[2]))
                 return ranks[self_description[2]] < ranks[other_description[2]]
-            return self_description[1] < self_description[1]
+            return ranks[self_description[1]] < ranks[other_description[1]]
 
         if self_hand_rank == "THREE_OF_A_KIND":
             if self_description[1] == other_description[1]:
@@ -168,7 +168,7 @@ class Hand:
                     return self_last < other_last
                 # print("Comparing {} < {}? {}".format(self_next_high, other_next_high, self_next_high < other_next_high))
                 return self_next_high < other_next_high
-            return self_description[1] < other_description[1]
+            return ranks[self_description[1]] < ranks[other_description[1]]
 
         if self_hand_rank == "TWO_PAIR":
             self_high_pair = self_description[1][1]
@@ -180,8 +180,8 @@ class Hand:
             if self_high_pair == other_high_pair:
                 if self_low_pair == other_low_pair:
                     return self_last_card < other_last_card
-                return self_low_pair < other_low_pair
-            return self_high_pair < other_high_pair
+                return ranks[self_low_pair] < ranks[other_low_pair]
+            return ranks[self_high_pair] < ranks[other_high_pair]
 
         if self_hand_rank == "PAIR":
             if self_description[1] == other_description[1]:
@@ -198,7 +198,7 @@ class Hand:
                         return self_last < other_last
                     return self_next_next_high < other_next_next_high
                 return self_next_high < other_next_high
-            return self_description[1] < other_description[1]
+            return ranks[self_description[1]] < ranks[other_description[1]]
 
         if self_hand_rank in ["HIGH_CARD", "FLUSH"]:
             sorted_other = other.sort()

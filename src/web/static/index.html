@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texas Hold'em Poker</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Lobby Screen -->
+        <div id="lobby" class="screen">
+            <h1>Texas Hold'em Poker</h1>
+            <div class="lobby-content">
+                <h2>Select Opponents</h2>
+                <div id="opponent-list" class="opponent-list">
+                    <!-- Populated by JavaScript -->
+                </div>
+                <div class="selected-opponents">
+                    <h3>Selected Opponents: <span id="selected-count">0</span></h3>
+                    <div id="selected-list"></div>
+                </div>
+                <div class="game-options">
+                    <label>
+                        Starting Bankroll:
+                        <input type="number" id="starting-bankroll" value="100" min="10" max="10000">
+                    </label>
+                </div>
+                <button id="start-game-btn" class="btn btn-primary" disabled>Start Game</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game" class="screen hidden">
+            <div class="poker-table">
+                <!-- Community Cards -->
+                <div class="community-area">
+                    <div class="pot-display">
+                        Pot: $<span id="pot-amount">0</span>
+                    </div>
+                    <div id="community-cards" class="cards-row">
+                        <!-- Cards populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Players around the table -->
+                <div id="players-area" class="players-area">
+                    <!-- Players populated by JS -->
+                </div>
+
+                <!-- Your hand -->
+                <div class="your-hand">
+                    <h3>Your Hand</h3>
+                    <div id="your-cards" class="cards-row">
+                        <!-- Your cards -->
+                    </div>
+                    <div class="your-info">
+                        <span>Bankroll: $<span id="your-bankroll">0</span></span>
+                        <span>On Table: $<span id="your-table-money">0</span></span>
+                    </div>
+                </div>
+
+                <!-- Action buttons -->
+                <div id="action-area" class="action-area hidden">
+                    <div class="action-info">
+                        <span>Current Bet: $<span id="current-bet">0</span></span>
+                        <span>To Call: $<span id="to-call">0</span></span>
+                    </div>
+                    <div class="action-buttons">
+                        <button id="fold-btn" class="btn btn-fold">Fold</button>
+                        <button id="call-btn" class="btn btn-call">Call</button>
+                        <div class="raise-controls">
+                            <input type="number" id="raise-amount" min="1">
+                            <button id="raise-btn" class="btn btn-raise">Raise</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game status -->
+                <div id="game-status" class="game-status">
+                    <span id="status-text">Waiting for game to start...</span>
+                </div>
+            </div>
+
+            <!-- Action history -->
+            <div class="history-panel">
+                <h3>Action History</h3>
+                <div id="history-list" class="history-list">
+                    <!-- Actions populated by JS -->
+                </div>
+            </div>
+
+            <!-- Round results modal -->
+            <div id="results-modal" class="modal hidden">
+                <div class="modal-content modal-content-wide">
+                    <h2>Round <span id="results-round-number">1</span> Results</h2>
+                    <div id="results-content"></div>
+                    <div id="results-hands" class="results-hands"></div>
+                    <button id="continue-btn" class="btn btn-primary">Continue</button>
+                </div>
+            </div>
+
+            <!-- Game over modal -->
+            <div id="game-over-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h2>Game Over</h2>
+                    <div id="game-over-content"></div>
+                    <button id="new-game-btn" class="btn btn-primary">New Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
